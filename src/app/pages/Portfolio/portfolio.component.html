@@ -1,0 +1,123 @@
+<section id="portfolio" class="relative py-10 overflow-hidden" [class.rtl]="directionClass">
+  
+  <!-- Animated Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background"></div>
+  
+  <!-- Animated Circles -->
+  <div class="absolute top-1/4 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-float-circle"></div>
+  <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-float-circle-slow"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="text-center mb-20">
+      
+      <!-- Badge -->
+      <div @scaleIn class="inline-block mb-6">
+        <div class="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <span class="text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+            ✦ {{ currentLang === 'fr' ? 'PORTFOLIO' : 'أعمالنا' }} ✦
+          </span>
+        </div>
+      </div>
+      
+      <!-- Title -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
+        {{ currentLang === 'fr' ? 'Nos Réalisations' : 'أعمالنا' }}
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        {{ currentLang === 'fr'
+          ? 'Découvrez nos projets innovants et nos réussites clients'
+          : 'اكتشف مشاريعنا المبتكرة ونجاحاتنا مع عملائنا'
+        }}
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div *ngFor="let project of projects; let i = index"
+           (mouseenter)="setHover(i, true)"
+           (mouseleave)="setHover(i, false)"
+           [@cardHover]="hoverStates[i] ? 'hovered' : 'normal'"
+           [attr.data-color]="project.color"
+           class="group relative cursor-pointer">
+        
+        <!-- Main Card -->
+        <div class="relative h-[400px] rounded-3xl overflow-hidden bg-card border border-border">
+          
+          <!-- Image Container -->
+          <div class="absolute inset-0 overflow-hidden">
+            <img [src]="project.image"
+                 [alt]="getText(project.title)"
+                 class="w-full h-full object-cover transition-transform duration-700"
+                 [class.scale-110]="hoverStates[i]">
+            
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+          </div>
+
+          <!-- Content -->
+          <div class="absolute inset-0 p-8 flex flex-col justify-end">
+            
+            <!-- Category Badge -->
+            <div class="w-fit px-4 py-1 rounded-full text-white text-xs font-medium mb-4"
+                 [ngClass]="'bg-gradient-to-r ' + project.color">
+              {{ getText(project.category) }}
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-2xl md:text-3xl mb-3 text-white">
+              {{ getText(project.title) }}
+            </h3>
+
+            <!-- Version alternative sans labels -->
+            <div class="flex flex-wrap gap-2 text-sm mb-3">
+              <span *ngIf="project.client" 
+                    class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">
+                {{ getText(project.client) }}
+              </span>
+              <span *ngIf="project.location" 
+                    class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full border border-blue-500/30">
+                {{ getText(project.location) }}
+              </span>
+              <span *ngIf="project.year" 
+                    class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full border border-purple-500/30">
+                {{ project.year }}
+              </span>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-300 mb-6">
+              {{ getText(project.description) }}
+            </p>
+
+            <!-- Buttons (apparaissent au hover) -->
+            <div [@contentSlide]="hoverStates[i] ? 'visible' : 'hidden'"
+                 class="flex gap-3">
+              
+              <!-- View Project Button -->
+              <button (mouseenter)="setButtonHover(i, 'view', true)"
+                      (mouseleave)="setButtonHover(i, 'view', false)"
+                      [@buttonHover]="isButtonHovered(i, 'view') ? 'hovered' : 'normal'"
+                      class="px-6 py-3 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 
+                             hover:bg-white/20 transition-all flex items-center gap-2 text-white">
+                <lucide-icon [img]="ExternalLink" class="h-4 w-4"></lucide-icon>
+                <span class="text-sm">{{ currentLang === 'fr' ? 'Voir le projet' : 'عرض المشروع' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Color Overlay (apparaît au hover) -->
+          <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+               [ngClass]="project.color"></div>
+        </div>
+
+        <!-- Shadow Effect -->
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br opacity-0 group-hover:opacity-30 blur-2xl -z-10 transition-opacity duration-500"
+             [ngClass]="project.color"></div>
+      </div>
+    </div>
+  </div>
+</section>

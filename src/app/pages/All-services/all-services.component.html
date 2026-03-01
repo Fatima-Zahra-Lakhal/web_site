@@ -1,0 +1,117 @@
+<div class="min-h-screen bg-background">
+  <app-header />
+  
+  <main class="pt-32 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <<div class="mb-16 fade-in text-center mx-auto">
+  <h1 class="text-5xl md:text-6xl lg:text-7xl mb-6">
+    {{ t('services.title') }}
+  </h1>
+
+  <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+    {{ t('services.subtitle') }}
+  </p>
+</div>
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div *ngFor="let service of servicesArray; let i = index"
+          class="fade-in"
+          [style.animation-delay]="i * 0.1 + 's'"
+        >
+          <a [routerLink]="['/services', service.id]" class="block h-full">
+            <div class="group relative h-full bg-card rounded-3xl overflow-hidden border border-border hover:border-cyan-500/50 transition-all duration-300">
+              <!-- Image -->
+              <div class="relative h-64 overflow-hidden">
+                <img
+                  [src]="service.image"
+                  [alt]="service.title[currentLang]"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent"></div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-8">
+                <h2 class="text-3xl mb-4 group-hover:text-cyan-500 transition-colors">
+                  {{ service.title[currentLang] }}
+                </h2>
+                <p class="text-muted-foreground mb-6 leading-relaxed">
+                  {{ service.shortDescription[currentLang] }}
+                </p>
+
+                <!-- Info Grid -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div class="flex items-center gap-2 text-sm">
+                    <lucide-icon [img]="Clock" class="h-4 w-4 text-cyan-500 flex-shrink-0"></lucide-icon>
+                    <span class="text-muted-foreground">{{ service.duration[currentLang] }}</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <lucide-icon [img]="Euro" class="h-4 w-4 text-cyan-500 flex-shrink-0"></lucide-icon>
+                    <span class="text-muted-foreground">{{ service.pricing[currentLang] }}</span>
+                  </div>
+                </div>
+
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span *ngFor="let tech of service.technologies.slice(0, 4); let j = index"
+                    class="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                  >
+                    {{ tech }}
+                  </span>
+                  <span *ngIf="service.technologies.length > 4"
+                    class="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                  >
+                    +{{ service.technologies.length - 4 }}
+                  </span>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-2 text-cyan-500 group-hover:gap-4 transition-all"
+                  [class.flex-row-reverse]="isArabic">
+                  <span class="font-medium">
+                    {{ t('common.learnMore') || 'En savoir plus' }}
+                  </span>
+                  <span class="text-xl transition-transform group-hover:translate-x-1" 
+                        [class.rotate-180]="isArabic">→</span>
+                </div>
+              </div>
+
+              <!-- Gradient Overlay -->
+              <div
+                class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"
+                [ngClass]="service.color">
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="mt-20 text-center fade-in" [style.animation-delay]="'0.4s'">
+        <div class="p-12 rounded-3xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <h2 class="text-3xl md:text-4xl mb-4">
+            {{ t('contact.title') }}
+          </h2>
+          <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            {{ t('contact.subtitle') }}
+          </p>
+          <a
+            [routerLink]="['/']"
+            fragment="contact"
+            class="group inline-block relative px-10 py-5 rounded-2xl overflow-hidden cursor-pointer"
+          >
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span class="relative z-10 text-white text-lg font-medium">
+              {{ t('nav.contact') }}
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-footer />
+</div>

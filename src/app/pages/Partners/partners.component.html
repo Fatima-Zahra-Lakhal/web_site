@@ -1,0 +1,191 @@
+<section id="partners" 
+         class="relative py-10 overflow-hidden" 
+         [class.rtl]="currentLang === 'ar'">
+  
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-50/80 via-white to-gray-50/80 dark:from-muted/20 dark:via-background dark:to-muted/20"></div>
+  
+  <!-- Animated Orbs -->
+  <div class="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[120px] animate-float"></div>
+  <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[120px] animate-float-slow"></div>
+  
+  <!-- Subtle Grid -->
+  <div class="absolute inset-0 bg-grid-gray-900/[0.02] dark:bg-grid-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="text-center mb-20" @fadeUp>
+      
+      <!-- Badge -->
+      <div class="inline-block mb-6" @fadeInScale>
+        <div class="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <span class="text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+            ✦ {{ currentLang === 'fr' ? 'PARTENAIRES' : 'شركاؤنا' }} ✦
+          </span>
+        </div>
+      </div>
+      
+      <!-- Title -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
+        {{ currentLang === 'fr' ? 'Ils nous font confiance' : 'يثقون بنا' }}
+      </h2>
+      
+      <!-- Subtitle -->
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        {{ currentLang === 'fr' 
+          ? 'Découvrez nos partenaires stratégiques et références clients'
+          : 'اكتشف شركاءنا الاستراتيجيين ومراجع عملائنا'
+        }}
+      </p>
+    </div>
+
+    <!-- Partners Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" @staggerFade>
+      <div *ngFor="let partner of partners; let i = index; trackBy: trackByPartnerName"
+           class="group relative"
+           @fadeUp
+           [@hoverCard]="getHoverState('partner' + i) ? 'hovered' : 'normal'"
+           (mouseenter)="setHoverState('partner' + i, true)"
+           (mouseleave)="setHoverState('partner' + i, false)">
+        
+        <!-- CARD -->
+        <div class="relative bg-white/70 dark:bg-card/50 backdrop-blur-sm rounded-3xl p-8 border border-gray-200 dark:border-white/10 
+                    transition-all duration-500 hover:-translate-y-2 hover:border-cyan-500/30
+                    h-full flex flex-col min-h-[320px] overflow-hidden shadow-lg dark:shadow-none">
+
+          <!-- Logo Container -->
+          <div class="relative w-24 h-24 mb-6 mx-auto">
+            <!-- Animated Circle -->
+            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 
+                        transition-transform duration-500"
+                 [class.scale-125]="getHoverState('partner' + i)">
+            </div>
+            
+            <!-- Logo -->
+            <div class="absolute inset-2 rounded-full bg-white dark:bg-card/50 backdrop-blur-sm 
+                        flex items-center justify-center overflow-hidden border border-gray-200 dark:border-white/10 shadow-inner">
+              <img *ngIf="!hasImageError(partner.name)"
+                   [src]="partner.logo" 
+                   [alt]="partner.name"
+                   class="w-full h-full object-contain p-3"
+                   loading="lazy"
+                   (error)="onImageError(partner.name, $event)">
+              <div *ngIf="hasImageError(partner.name)" 
+                   class="w-full h-full flex items-center justify-center">
+                <lucide-icon [img]="partner.icon" class="h-10 w-10 text-cyan-500"></lucide-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner Name (non traduit) -->
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white text-center mb-3 transition-colors duration-300"
+              [class.text-cyan-600]="getHoverState('partner' + i)"
+              [class.dark:text-cyan-400]="getHoverState('partner' + i)">
+            {{ partner.name }}
+          </h3>
+
+          <!-- Partner Description (traduit) -->
+          <p class="text-gray-600 dark:text-white/60 text-center mb-6 leading-relaxed">
+            {{ getText(partner.description) }}
+          </p>
+
+          <!-- Partner Type Badge (traduit) -->
+          <div class="flex justify-center mt-auto">
+            <span [class]="getPartnerTypeClass(partner.type)">
+              {{ partner.typeLabel[currentLang === 'fr' ? 'fr' : 'ar'] }}
+            </span>
+          </div>
+
+          <!-- Hover Gradient -->
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/5 to-blue-500/5 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          </div>
+
+          <!-- Bottom Accent -->
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 h-1 
+                      bg-gradient-to-r from-cyan-500 to-blue-500 
+                      transition-all duration-300"
+               [style.width]="getHoverState('partner' + i) ? '100%' : '0'">
+          </div>
+        </div>
+
+        <!-- Shadow -->
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 
+                    opacity-0 group-hover:opacity-20 blur-2xl -z-10 transition-opacity duration-500">
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="mt-20 text-center" @fadeUp>
+      <div class="inline-flex items-center gap-8 px-8 py-6 
+                  rounded-2xl bg-white/70 dark:bg-card/50 backdrop-blur-sm border border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none">
+        
+        <div>
+          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+            25+
+          </div>
+          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Partenaires actifs' : 'شريك نشط' }}</div>
+        </div>
+        
+        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
+        
+        <div>
+          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+            15+
+          </div>
+          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Ans de collaboration' : 'سنوات من التعاون' }}</div>
+        </div>
+        
+        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
+        
+        <div>
+          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+            150+
+          </div>
+          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Projets réalisés' : 'مشروع منجز' }}</div>
+        </div>
+        
+        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
+        
+        <div>
+          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+            98%
+          </div>
+          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Satisfaction' : 'رضا العملاء' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16 text-center" @fadeUp>
+      <button (click)="onBecomePartner()"
+              class="group relative inline-flex items-center gap-3 px-8 py-4 
+                     rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 
+                     hover:from-cyan-500 hover:to-blue-500
+                     dark:from-cyan-500 dark:to-blue-500
+                     dark:hover:from-cyan-400 dark:hover:to-blue-400
+                     transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25
+                     focus:outline-none focus:ring-2 focus:ring-cyan-500/50">
+        
+        <span class="text-white font-medium">
+          {{ currentLang === 'fr' ? 'Devenir partenaire' : 'كن شريكًا' }}
+        </span>
+      
+        <lucide-icon [img]="ArrowRight" 
+                     class="h-5 w-5 text-white group-hover:translate-x-1 transition-transform duration-300"
+                     [class.rotate-180]="currentLang === 'ar'">
+        </lucide-icon>
+      </button>
+
+      <p class="text-sm text-gray-600 dark:text-white/40 mt-4">
+        {{ currentLang === 'fr' 
+          ? 'Rejoignez notre réseau de partenaires et développez votre business' 
+          : 'انضم إلى شبكة شركائنا وطور أعمالك' 
+        }}
+      </p>
+    </div>
+
+  </div>
+</section>

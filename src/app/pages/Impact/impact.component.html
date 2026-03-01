@@ -1,0 +1,172 @@
+<section id="impact" 
+         class="relative py-10 overflow-hidden" 
+         [class.rtl]="currentLang === 'ar'">
+  
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-50/80 via-white to-gray-50/80 dark:from-muted/20 dark:via-background dark:to-muted/20"></div>
+  
+  <!-- Animated Orbs -->
+  <div class="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[120px] animate-float"></div>
+  <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[120px] animate-float-slow"></div>
+  
+  <!-- Subtle Grid -->
+  <div class="absolute inset-0 bg-grid-gray-900/[0.02] dark:bg-grid-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section Header -->
+    <div class="text-center mb-16" @fadeUp>
+      
+      <!-- Badge -->
+      <div class="inline-block mb-6" @fadeInScale>
+        <div class="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <span class="text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+            ✦ {{ currentLang === 'fr' ? 'IMPACT' : 'الأثر' }} ✦
+          </span>
+        </div>
+      </div>
+      
+      <!-- Title -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
+        {{ currentLang === 'fr' ? 'Notre impact en chiffres' : 'تأثيرنا بالأرقام' }}
+      </h2>
+      
+      <!-- Subtitle -->
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        {{ currentLang === 'fr' 
+          ? 'Des résultats concrets qui parlent d\'eux-mêmes'
+          : 'نتائج ملموسة تتحدث عن نفسها'
+        }}
+      </p>
+    </div>
+
+    <!-- Barres de progression - Style 1 (Vertical) -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16" @staggerBars>
+      <div *ngFor="let item of impactData; let i = index" 
+           class="flex flex-col items-center"
+           @fadeUp>
+        
+        <!-- Icone -->
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br p-[2px] mb-4"
+             [ngClass]="item.color">
+          <div class="w-full h-full rounded-2xl bg-white dark:bg-card flex items-center justify-center">
+            <lucide-icon [img]="item.icon" class="h-7 w-7 text-cyan-600 dark:text-cyan-500"></lucide-icon>
+          </div>
+        </div>
+
+        <!-- Barre de progression verticale -->
+        <div class="relative w-16 h-40 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mb-3">
+          <div class="absolute bottom-0 left-0 w-full rounded-full transition-all duration-1000 ease-out"
+               [style.height]="item.percentage + '%'"
+               [ngClass]="'bg-gradient-to-t ' + item.color">
+          </div>
+        </div>
+
+        <!-- Valeur -->
+        <div class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+          {{ item.value }}
+        </div>
+
+        <!-- Label -->
+        <div class="text-sm text-gray-600 dark:text-white/40 text-center">
+          {{ getText(item.description) }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Style 2 - Barres horizontales -->
+    <div class="max-w-3xl mx-auto mb-16">
+      <h3 class="text-2xl font-bold text-center mb-10">
+        <span class="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+          {{ currentLang === 'fr' ? 'Indicateurs de performance' : 'مؤشرات الأداء' }}
+        </span>
+      </h3>
+
+      <div class="space-y-6">
+        <div *ngFor="let item of impactData; let i = index" 
+             class="group"
+             @fadeUp>
+          
+          <!-- Label et valeur -->
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-2">
+              <lucide-icon [img]="item.icon" class="h-4 w-4 text-cyan-500"></lucide-icon>
+              <span class="text-gray-700 dark:text-gray-300">{{ getText(item.label) }}</span>
+            </div>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400">{{ item.value }}</span>
+          </div>
+
+          <!-- Barre de progression horizontale -->
+          <div class="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+            <div class="absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out"
+                 [style.width]="item.percentage + '%'"
+                 [ngClass]="'bg-gradient-to-r ' + item.color">
+            </div>
+            
+            <!-- Effet de brillance au survol -->
+            <div class="absolute top-0 left-0 h-full w-20 bg-white/30 dark:bg-white/10 blur-md 
+                        -translate-x-full group-hover:translate-x-[500%] transition-transform duration-1000"></div>
+          </div>
+
+          <!-- Description -->
+          <div class="mt-1 text-xs text-gray-500 dark:text-white/30 text-right">
+            {{ getText(item.description) }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Style 3 - Cercles de progression -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+      <div *ngFor="let item of keyValues; let i = index" 
+           class="text-center group"
+           @fadeUp>
+        
+        <!-- Cercle de progression -->
+        <div class="relative w-32 h-32 mx-auto mb-4">
+          <!-- Cercle de fond -->
+          <svg class="w-full h-full" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    class="text-gray-200 dark:text-gray-800"
+                    stroke-width="8"/>
+            
+            <!-- Cercle de progression (exemple à 75%) -->
+            <circle cx="50" cy="50" r="45" 
+                    fill="none" 
+                    [ngClass]="'stroke-cyan-500 dark:stroke-cyan-400'"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                    stroke-dasharray="283"
+                    stroke-dashoffset="70"
+                    transform="rotate(-90 50 50)"/>
+          </svg>
+          
+          <!-- Valeur au centre -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+              {{ item.value }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Label -->
+        <div class="text-sm text-gray-600 dark:text-white/40">
+          {{ getText(item.label) }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Note de bas de page -->
+    <div class="mt-16 text-center" @fadeUp>
+      <p class="text-sm text-gray-500 dark:text-white/30 italic">
+        {{ currentLang === 'fr' 
+          ? '* Données cumulées depuis 1989, année de création de Lambda Soft'
+          : '*بيانات متراكمة منذ 1989، سنة إنشاء Lambda Soft'
+        }}
+      </p>
+    </div>
+
+  </div>
+</section>

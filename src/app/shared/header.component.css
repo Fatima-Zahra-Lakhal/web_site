@@ -1,0 +1,30 @@
+/* Transition plus rapide pour le background */
+header {
+  transition: background-color 0.2s ease-out,
+              border-color 0.2s ease-out !important;
+}
+
+/* Supprimer la transition sur les autres éléments si nécessaire */
+header * {
+  transition: color 0.2s ease-out !important;
+}
+
+/* Force l'application immédiate des classes */
+.bg-gray-900\/90,
+.bg-gray-900\/40,
+.bg-gray-800\/60,
+.bg-background\/80,
+.bg-card\/50,
+.bg-transparent {
+  transition: background-color 0.2s ease-out !important;
+}
+
+/* S'assurer que le transparent s'applique rapidement */
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+/* Désactiver les transitions qui pourraient ralentir */
+.no-transition {
+  transition: none !important;
+}

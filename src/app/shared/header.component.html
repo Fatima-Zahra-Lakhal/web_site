@@ -1,0 +1,93 @@
+<header
+  @slideDown
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  [ngClass]="{
+    'bg-gray-900/30 backdrop-blur-xl border-b border-gray-800 shadow-lg shadow-cyan-500/10': isHomeSection && !scrolled,
+    'bg-gray-900/70 backdrop-blur-xl border-b border-gray-800 shadow-lg shadow-cyan-500/10': isHomeSection && scrolled,
+    'bg-background/80 backdrop-blur-xl border-b border-border shadow-lg': !isHomeSection
+  }">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <div>
+        <img src="assets/lambdasoft.png"
+             class="h-20 cursor-pointer"
+             (click)="scrollToSection('home')" />
+      </div>
+
+      <!-- Navigation -->
+      <nav
+        class="hidden md:flex items-center space-x-2 rounded-full px-3 py-2 border"
+        [ngClass]="{
+          'bg-gray-800/40 border-gray-700': isHomeSection,
+          'bg-card/50 border-border': !isHomeSection
+        }">
+
+        <button
+          *ngFor="let item of navItems"
+          (click)="scrollToSection(item.id)"
+          class="px-5 py-2 rounded-full text-sm font-medium transition-colors"
+          [ngClass]="{
+            'text-gray-200 hover:text-cyan-400': isHomeSection,
+            'text-foreground hover:text-cyan-500': !isHomeSection
+          }">
+
+          {{ languageService.t(item.key) }}
+
+        </button>
+      </nav>
+
+      <!-- Right Buttons -->
+      <div class="flex items-center gap-2">
+
+        <!-- Language -->
+        <button
+          (click)="toggleLanguage()"
+          class="p-3 rounded-xl border transition-all flex items-center gap-2"
+          [ngClass]="{
+            'bg-gray-800/40 border-gray-700 text-gray-200': isHomeSection,
+            'bg-card/50 border-border text-foreground': !isHomeSection
+          }">
+
+          <lucide-icon [img]="Globe" size="18"></lucide-icon>
+          <span>{{ languageService.language() }}</span>
+
+        </button>
+
+        <!-- Theme -->
+        <button
+          (click)="toggleTheme()"
+          class="p-3 rounded-xl border transition-all flex items-center gap-2"
+          [ngClass]="{
+            'bg-gray-800/40 border-gray-700 text-gray-200': isHomeSection,
+            'bg-card/50 border-border text-foreground': !isHomeSection
+          }">
+
+          <lucide-icon
+            *ngIf="themeService.theme() === 'light'"
+            [img]="Moon">
+          </lucide-icon>
+
+          <lucide-icon
+            *ngIf="themeService.theme() === 'dark'"
+            [img]="Sun">
+          </lucide-icon>
+
+        </button>
+
+        <!-- Mobile -->
+        <button
+          class="md:hidden p-3 rounded-xl border bg-card/50 border-border"
+          (click)="toggleMenu()">
+          <span *ngIf="!mobileMenuOpen">☰</span>
+          <span *ngIf="mobileMenuOpen">✕</span>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</header>

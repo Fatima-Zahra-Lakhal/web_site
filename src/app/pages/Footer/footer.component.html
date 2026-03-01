@@ -1,0 +1,153 @@
+<footer class="relative overflow-hidden bg-card border-t-2 border-cyan-500/30" [class.rtl]="currentLang === 'ar'">
+  
+  <!-- Gradient Background plus prononcé -->
+  <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10"></div>
+  
+  <!-- Animated Orb -->
+  <div class="absolute -bottom-48 -right-48 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] animate-orb-pulse"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Main Footer Content -->
+    <div class="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      
+      <!-- Brand Column -->
+      <div class="lg:col-span-2">
+        <div @fadeInUp class="mb-6">
+          <!-- Logo -->
+          <img src="assets/lambdasoft.png" alt="Lambda Soft" class="h-20 w-auto mb-4" />
+          
+          <!-- Description -->
+          <p class="text-muted-foreground max-w-sm leading-relaxed">
+            {{ t('footer.description') }}
+          </p>
+        </div>
+
+        <!-- Social Links -->
+        <div @fadeInUp class="flex gap-3">
+          <div *ngFor="let social of socialLinks; let i = index"
+               (mouseenter)="setSocialHover(i, true)"
+               (mouseleave)="setSocialHover(i, false)"
+               [@hoverScale]="socialHoverStates[i] ? 'hovered' : 'normal'"
+               class="relative">
+            
+            <a [href]="social.href"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="w-12 h-12 rounded-xl bg-background border-2 border-cyan-500/30 
+                      flex items-center justify-center transition-all group
+                      hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/30
+                      focus:outline-none focus:ring-2 focus:ring-cyan-500"
+               [ngClass]="social.color"
+               [attr.aria-label]="'Social link ' + (i + 1)">
+              
+              <lucide-icon [img]="social.icon" class="h-5 w-5"></lucide-icon>
+              
+              <!-- Hover Glow Effect -->
+              <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 
+                          opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Column -->
+      <div @fadeInUp>
+        <h4 class="text-lg font-medium mb-6 text-foreground border-b-2 border-cyan-500/30 pb-2">
+          {{ currentLang === 'fr' ? 'Navigation' : 'التنقل' }}
+        </h4>
+        <ul class="space-y-3">
+          <li *ngFor="let item of navItems; let i = index"
+              (mouseenter)="setNavHover(i, true)"
+              (mouseleave)="setNavHover(i, false)">
+            
+            <a [href]="'#' + item"
+               class="group text-muted-foreground hover:text-cyan-500 transition-colors 
+                      flex items-center gap-2 focus:outline-none focus:text-cyan-500
+                      border-l-2 border-transparent hover:border-cyan-500 pl-2">
+              
+              <span>{{ t('nav.' + item) }}</span>
+              
+              <!-- Arrow Icon -->
+              <lucide-icon [img]="ArrowRight" 
+                          class="h-4 w-4 transition-all duration-300"
+                          [ngClass]="{
+                            'opacity-100': navHoverStates[i],
+                            'opacity-0': !navHoverStates[i],
+                            'translate-x-0': navHoverStates[i],
+                            '-translate-x-2': !navHoverStates[i] && currentLang !== 'ar',
+                            'translate-x-2': !navHoverStates[i] && currentLang === 'ar',
+                            'rotate-180': currentLang === 'ar'
+                          }">
+              </lucide-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div @fadeInUp>
+        <h4 class="text-lg font-medium mb-6 text-foreground border-b-2 border-cyan-500/30 pb-2">
+          {{ currentLang === 'fr' ? 'Contact' : 'اتصل بنا' }}
+        </h4>
+        <ul class="space-y-3">
+          <li class="border-l-2 border-transparent hover:border-cyan-500 pl-2 transition-all">
+            <a href="mailto:contact@lambdasoft.com" 
+               class="text-muted-foreground hover:text-cyan-500 transition-colors focus:outline-none focus:text-cyan-500">
+              contact@lambdasoft.com
+            </a>
+          </li>
+          <li class="border-l-2 border-transparent hover:border-cyan-500 pl-2 transition-all">
+            <a href="tel:+213XXXXXXX" 
+               class="text-muted-foreground hover:text-cyan-500 transition-colors focus:outline-none focus:text-cyan-500">
+              +213 XXX XXX XXX
+            </a>
+          </li>
+          <li class="text-muted-foreground border-l-2 border-transparent pl-2">
+            {{ currentLang === 'fr' ? 'Alger, Algérie' : 'الجزائر، الجزائر' }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar avec ligne plus visible -->
+    <div class="py-8 border-t-2 border-cyan-500/30">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        
+        <!-- Copyright -->
+        <p @fadeIn class="text-sm text-muted-foreground text-center md:text-left">
+          © {{ currentYear }} <span class="font-medium text-cyan-500">Lambda Soft</span>. {{ t('footer.rights') }}
+        </p>
+
+        <!-- Back to Top Button -->
+        <button (click)="scrollToTop()"
+                (mouseenter)="setButtonHover(true)"
+                (mouseleave)="setButtonHover(false)"
+                (mousedown)="setButtonTap(true)"
+                (mouseup)="setButtonTap(false)"
+                (mouseleave)="setButtonTap(false)"
+                [@hoverScale]="buttonHoverState"
+                [@tapScale]="buttonTapState"
+                class="group relative px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500
+                       border-2 border-cyan-400 shadow-lg shadow-cyan-500/30
+                       hover:shadow-xl hover:shadow-cyan-500/40 transition-all overflow-hidden
+                       focus:outline-none focus:ring-2 focus:ring-cyan-500">
+          
+          <!-- Hover Background -->
+          <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 
+                      opacity-0 group-hover:opacity-100 transition-opacity">
+          </div>
+          
+          <!-- Button Content -->
+          <div class="relative flex items-center gap-2 text-sm font-medium text-white">
+            <span>{{ backToTopText }}</span>
+            <div [@arrowAnimation]="{value: '', params: {}}" class="text-white">
+              ↑
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>

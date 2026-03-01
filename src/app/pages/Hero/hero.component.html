@@ -1,0 +1,166 @@
+<section
+  #section
+  id="home"
+  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+>
+
+  <!-- VIDEO BACKGROUND LOCALE (assets/bg-2.mp4) -->
+  <div class="absolute inset-0 w-full h-full">
+    <!-- Overlay sombre plus prononcé pour le mode dark -->
+    <div class="absolute inset-0 bg-black/60 z-10"></div>
+    
+    <!-- Vidéo locale depuis le dossier assets -->
+    <video 
+      autoplay 
+      loop 
+      muted 
+      preload="auto"
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+      <source src="assets/bg-1.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+  </div>
+
+  <!-- GRID BACKGROUND - plus visible en dark -->
+  <div
+    class="absolute inset-0 pointer-events-none z-30"
+    style="background-image:
+      linear-gradient(to right, rgba(0,200,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,200,255,0.05) 1px, transparent 1px);
+      background-size: 80px 80px;">
+  </div>
+
+  <!-- GRADIENT ORB LEFT - version dark -->
+  <div
+    class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 animate-orb1 z-30"
+    style="background: radial-gradient(circle, #0088FF 0%, transparent 70%);">
+  </div>
+
+  <!-- GRADIENT ORB RIGHT - version dark -->
+  <div
+    class="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px] opacity-15 animate-orb2 z-30"
+    style="background: radial-gradient(circle, #0044AA 0%, transparent 70%);">
+  </div>
+
+  <!-- PARTICLES - version dark plus lumineuse -->
+  <div *ngFor="let p of particles"
+       class="absolute w-1 h-1 bg-cyan-400 rounded-full animate-particle z-30"
+       [style.left.%]="p.left"
+       [style.top.%]="p.top"
+       [style.animationDuration.s]="p.duration"
+       style="box-shadow: 0 0 15px rgba(6, 182, 212, 1);">
+  </div>
+
+  <!-- CONTENT - version dark avec texte plus clair -->
+  <div class="relative max-w-7xl mx-auto px-4 py-32 text-center z-40">
+
+    <!-- BADGE - version dark -->
+    <div
+      class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full relative overflow-hidden group cursor-pointer"
+      @fadeUp
+    >
+      <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/30 to-blue-400/30 backdrop-blur-xl border border-cyan-400/40"></div>
+      <lucide-icon [img]="Sparkles" class="h-4 w-4 text-cyan-300 relative z-10"></lucide-icon>
+      <span class="relative z-10 text-sm text-cyan-300 font-medium">
+        Lambda Soft
+      </span>
+      <lucide-icon [img]="Zap" class="h-4 w-4 text-cyan-300 relative z-10"></lucide-icon>
+    </div>
+
+    <!-- TITLE - version dark -->
+    <div @fadeUp>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-none">
+        <span class="block text-white mb-2">
+          {{ languageService.t('hero.title') }}
+        </span>
+
+        <span class="block relative inline-block">
+          <span
+            class="relative z-10 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            {{ languageService.t('hero.subtitle') }}
+          </span>
+
+          <span
+            class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 blur-2xl opacity-40 animate-glow">
+          </span>
+        </span>
+      </h1>
+    </div>
+
+    <!-- DESCRIPTION - version dark -->
+    <p
+      @fadeUp
+      class="mt-8 text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+    >
+      {{ languageService.t('hero.description') }}
+    </p>
+
+    <!-- BUTTONS - version dark -->
+    <div
+      @fadeUp
+      class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12"
+    >
+      <button
+        (click)="scrollToSection('services')"
+        class="group relative px-10 py-5 rounded-2xl overflow-hidden"
+      >
+        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+        <div class="relative z-10 text-white text-lg font-medium">
+          {{ languageService.t('hero.cta') }}
+        </div>
+      </button>
+
+      <button
+        (click)="scrollToSection('contact')"
+        class="group relative px-10 py-5 rounded-2xl overflow-hidden"
+      >
+        <div class="absolute inset-0 bg-gray-800 border border-gray-700 backdrop-blur-xl"></div>
+        <div class="relative z-10 text-white text-lg font-medium">
+          {{ languageService.t('hero.contact') }}
+        </div>
+      </button>
+    </div>
+
+    <!-- STATS - version dark avec traduction -->
+    <div class="flex flex-wrap justify-center gap-12 mt-20 mb-16" @fadeUp>
+      <div class="text-center">
+        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          150+
+        </div>
+        <div class="text-sm text-gray-400">
+          {{ languageService.t('hero.stats.projects') }}
+        </div>
+      </div>
+
+      <div class="text-center">
+        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          50+
+        </div>
+        <div class="text-sm text-gray-400">
+          {{ languageService.t('hero.stats.clients') }}
+        </div>
+      </div>
+
+      <div class="text-center">
+        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          10+
+        </div>
+        <div class="text-sm text-gray-400">
+          {{ languageService.t('hero.stats.years') }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCROLL INDICATOR - version dark -->
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-40">
+    <div class="text-xs text-gray-400 uppercase tracking-wider">
+      {{ languageService.t('hero.scroll') }}
+    </div>
+    <div class="w-[2px] h-12 bg-gradient-to-b from-cyan-500 to-transparent"></div>
+  </div>
+
+</section>

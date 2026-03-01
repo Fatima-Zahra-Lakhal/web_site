@@ -1,0 +1,108 @@
+/* animations personnalisées */
+@keyframes float-circle {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -10px) scale(1.05);
+  }
+  50% {
+    transform: translate(20px, 0) scale(1.1);
+  }
+  75% {
+    transform: translate(10px, 10px) scale(1.05);
+  }
+}
+
+.animate-float-circle {
+  animation: float-circle 20s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Support RTL */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.rtl .left-0 {
+  left: auto;
+  right: 0;
+}
+
+.rtl .right-0 {
+  right: auto;
+  left: 0;
+}
+
+.rtl .-right-2 {
+  right: auto;
+  left: -0.5rem;
+}
+
+.rtl .-left-2 {
+  left: auto;
+  right: -0.5rem;
+}
+
+.rtl .translate-x-1 {
+  transform: translateX(-0.25rem);
+}
+
+.rtl .-translate-x-1 {
+  transform: translateX(0.25rem);
+}
+
+.rtl .group-hover:translate-x-1 {
+  transform: translateX(-0.25rem);
+}
+
+.rtl .group-hover:-translate-x-1 {
+  transform: translateX(0.25rem);
+}
+
+/* Style pour les inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Effet de glow pour les champs focus */
+.focus-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+/* Style personnalisé pour la scrollbar */
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.3);
+  border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.5);
+}

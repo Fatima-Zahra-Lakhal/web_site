@@ -1,0 +1,180 @@
+<section id="contact" class="relative py-10 overflow-hidden" [class.rtl]="currentLang === 'ar'">
+  
+  <!-- Background Dynamique -->
+  <div class="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background"></div>
+  
+  <!-- Éléments Flottants Modernes -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse-slow"></div>
+  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] animate-pulse-slower"></div>
+  
+  <!-- Grille Subtile -->
+  <div class="absolute inset-0 bg-grid-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header avec Animation de Scroll -->
+    <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="800">
+      
+      <!-- Badge Moderne -->
+      <div class="inline-flex mb-6">
+  <div class="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <span class="text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+            ✦ CONTACT ✦
+          </span>
+        </div>
+      </div>
+      
+      <!-- Titre Épuré -->
+     <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
+        {{ t('contact.title') }}
+      </h2>
+      
+      <!-- Sous-titre Élégant -->
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        {{ t('contact.subtitle') }}
+      </p>
+    </div>
+
+    <!-- Main Grid avec Espacement Harmonieux -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      
+      <!-- Left: Contact Info - Design Épuré -->
+      <div class="space-y-6" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
+        
+        <!-- Info Cards avec Design Minimaliste -->
+        <div class="space-y-4">
+          <div *ngFor="let info of contactInfo; let i = index"
+               class="group relative"
+               [class.transform]="true"
+               [style.transition-delay]="i * 50 + 'ms'">
+            
+            <div class="flex items-center gap-4 p-5 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 
+                        hover:border-cyan-500/30 hover:bg-card/80 transition-all duration-500 hover:scale-[1.02]">
+              
+              <!-- Icon Container Minimal -->
+              <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/10 to-blue-500/10 
+                          flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <lucide-icon [img]="info.icon" class="h-5 w-5 text-cyan-400"></lucide-icon>
+              </div>
+              
+              <!-- Text Content -->
+              <div>
+                <div class="text-xs text-muted-foreground/70 mb-0.5 font-light">{{ info.label }}</div>
+                <div class="text-base font-medium">{{ info.value }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions - Design Moderne -->
+        <div class="grid grid-cols-2 gap-3 pt-4">
+          
+          <!-- Chat Button - Version Épurée -->
+          <button (click)="onSubmit($event)"
+                  class="group relative p-4 rounded-xl bg-card/30 backdrop-blur-sm border border-border/50 
+                         hover:border-cyan-500/30 transition-all duration-500 hover:bg-card/50
+                         focus:outline-none focus:ring-2 focus:ring-cyan-500/30">
+            
+            <lucide-icon [img]="MessageSquare" class="h-6 w-6 text-cyan-400/70 mb-2 mx-auto group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500"></lucide-icon>
+            <div class="text-xs font-medium">{{ currentLang === 'fr' ? 'Chat' : 'دردشة' }}</div>
+            <div class="text-[10px] text-muted-foreground/60 mt-0.5">{{ currentLang === 'fr' ? '24/7' : '٢٤/٧' }}</div>
+          </button>
+
+          <!-- Calendar Button - Version Épurée -->
+          <button (click)="onSubmit($event)"
+                  class="group relative p-4 rounded-xl bg-card/30 backdrop-blur-sm border border-border/50 
+                         hover:border-cyan-500/30 transition-all duration-500 hover:bg-card/50
+                         focus:outline-none focus:ring-2 focus:ring-cyan-500/30">
+            
+            <lucide-icon [img]="Calendar" class="h-6 w-6 text-cyan-400/70 mb-2 mx-auto group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500"></lucide-icon>
+            <div class="text-xs font-medium">{{ currentLang === 'fr' ? 'Call' : 'مكالمة' }}</div>
+            <div class="text-[10px] text-muted-foreground/60 mt-0.5">{{ currentLang === 'fr' ? 'Réserver' : 'احجز' }}</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Contact Form - Design Flottant -->
+      <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+        
+        <form (ngSubmit)="onSubmit($event)" 
+              class="relative p-6 md:p-8 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/50
+                     hover:border-cyan-500/30 transition-all duration-700 hover:shadow-2xl hover:shadow-cyan-500/5">
+          
+          <!-- Form Fields - Espacés et Aérés -->
+          <div class="relative space-y-5">
+            
+            <!-- Name Field - Design Minimal -->
+            <div>
+              <label for="name" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
+                {{ t('contact.name') }}
+              </label>
+              <input type="text"
+                     id="name"
+                     name="name"
+                     [(ngModel)]="formData.name"
+                     required
+                     (focus)="onFocus('name')"
+                     (blur)="onBlur()"
+                     class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
+                            focus:border-cyan-500/50 focus:outline-none transition-all duration-500
+                            text-foreground text-sm backdrop-blur-sm"
+                     [class.border-cyan-500/50]="focusedField === 'name'">
+            </div>
+
+            <!-- Email Field - Design Minimal -->
+            <div>
+              <label for="email" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
+                {{ t('contact.email') }}
+              </label>
+              <input type="email"
+                     id="email"
+                     name="email"
+                     [(ngModel)]="formData.email"
+                     required
+                     (focus)="onFocus('email')"
+                     (blur)="onBlur()"
+                     class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
+                            focus:border-cyan-500/50 focus:outline-none transition-all duration-500
+                            text-foreground text-sm backdrop-blur-sm"
+                     [class.border-cyan-500/50]="focusedField === 'email'">
+            </div>
+
+            <!-- Message Field - Design Minimal -->
+            <div>
+              <label for="message" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
+                {{ t('contact.message') }}
+              </label>
+              <textarea id="message"
+                        name="message"
+                        rows="4"
+                        [(ngModel)]="formData.message"
+                        required
+                        (focus)="onFocus('message')"
+                        (blur)="onBlur()"
+                        class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
+                               focus:border-cyan-500/50 focus:outline-none transition-all duration-500
+                               resize-none text-foreground text-sm backdrop-blur-sm"
+                        [class.border-cyan-500/50]="focusedField === 'message'">
+              </textarea>
+            </div>
+
+            <!-- Submit Button - Design Épuré -->
+            <button type="submit"
+                    class="group relative w-full py-3.5 rounded-lg overflow-hidden
+                           bg-gradient-to-r from-cyan-500/90 to-blue-500/90
+                           hover:from-cyan-400 hover:to-blue-400
+                           transition-all duration-500 hover:scale-[1.02]
+                           focus:outline-none focus:ring-2 focus:ring-cyan-500/50">
+              
+              <!-- Button Content -->
+              <div class="relative z-10 flex items-center justify-center gap-2 text-white text-sm font-light">
+                {{ t('contact.send') }}
+                <lucide-icon [img]="Send" class="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300"></lucide-icon>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
