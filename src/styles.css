@@ -112,3 +112,63 @@ video {
                     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
 }
+
+/* Dans styles.css ou le fichier CSS de votre composant */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Animation pour le texte */
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Amélioration du rendu du texte */
+.text-gradient {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+/* Add to your component's styles or global styles.css */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Ajustez les marges/paddings selon vos besoins */
+.rtl .ml-2 {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+.rtl .mr-2 {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}

@@ -1,179 +1,487 @@
-<section id="contact" class="relative py-10 overflow-hidden" [class.rtl]="currentLang === 'ar'">
+<section id="contact" class="contact relative py-10 overflow-hidden" 
+         [class.rtl]="currentLang === 'ar'">
   
-  <!-- Background Dynamique -->
-  <div class="absolute inset-0 bg-gradient-to-b from-background via-muted/10 to-background"></div>
+  <!-- Background artistique avec dégradé dynamique -->
+  <div class="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-950 dark:via-background dark:to-blue-950/30"></div>
   
-  <!-- Éléments Flottants Modernes -->
-  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse-slow"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] animate-pulse-slower"></div>
-  
-  <!-- Grille Subtile -->
-  <div class="absolute inset-0 bg-grid-white/[0.02] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Éléments artistiques animés -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <!-- Cercles flous artistiques -->
+    <div class="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 dark:from-cyan-500/30 dark:to-blue-500/30 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/20 to-pink-500/20 dark:from-purple-500/30 dark:to-pink-500/30 rounded-full blur-3xl animate-pulse-slower"></div>
     
-    <!-- Section Header avec Animation de Scroll -->
-    <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="800">
+    <!-- Lignes ondulées -->
+    <svg class="absolute top-40 right-0 w-64 h-64 text-cyan-500/10 dark:text-cyan-500/20" viewBox="0 0 200 200" fill="none">
+      <path d="M0 100 Q 50 50, 100 100 T 200 100" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+      <path d="M0 120 Q 50 80, 100 120 T 200 120" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
+      <path d="M0 80 Q 50 120, 100 80 T 200 80" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity="0.4"/>
+    </svg>
+    
+    <!-- Points décoratifs -->
+    <div class="absolute bottom-40 left-20 grid grid-cols-3 gap-3 opacity-20 dark:opacity-30">
+      <div class="w-2 h-2 rounded-full bg-cyan-500"></div>
+      <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+      <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+    </div>
+  </div>
+
+  <div class="contact__container relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" [class.rtl]="currentLang === 'ar'">
+    <!-- Header Section avec design artistique -->
+    <div class="contact__header text-center mb-20 relative">
+      <!-- Élément décoratif circulaire -->
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
       
-      <!-- Badge Moderne -->
-      <div class="inline-flex mb-6">
-  <div class="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
-          <span class="text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-            ✦ CONTACT ✦
+      <div @scaleIn class="inline-block mb-8 relative">
+        <div class="contact__badge px-8 py-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 backdrop-blur-sm dark:from-cyan-500/20 dark:to-blue-500/20 dark:border-cyan-500/30 rounded-full">
+          <span class="relative flex items-center gap-2 text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">
+            <span>{{ currentLang === 'fr' ? '✦' : '★' }}</span> {{ currentLang === 'fr' ? 'CONTACT' : 'اتصل بنا' }} <span>{{ currentLang === 'fr' ? '✦' : '★' }}</span>
           </span>
         </div>
       </div>
       
-      <!-- Titre Épuré -->
-     <h2 class="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
-        {{ t('contact.title') }}
+      <h2 @fadeInUp class="text-5xl md:text-7xl font-bold mb-6 text-gray-900 dark:text-white relative">
+        <span class="bg-gradient-to-r from-slate-900 via-cyan-900 to-blue-900 dark:from-white dark:via-cyan-300 dark:to-blue-300 bg-clip-text text-transparent">
+          {{ currentLang === 'fr' ? 'Parlons de votre' : 'دعونا نتحدث عن' }}
+        </span>
+        <br />
+        <span class="relative inline-block mt-2">
+          {{ currentLang === 'fr' ? 'projet créatif' : 'مشروعك الإبداعي' }}
+          <svg class="absolute -bottom-4 left-0 w-full h-3 text-cyan-500/30" viewBox="0 0 200 10">
+            <path d="M0 5 Q 50 0, 100 5 T 200 5" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </span>
       </h2>
       
-      <!-- Sous-titre Élégant -->
-        <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        {{ t('contact.subtitle') }}
+      <p class="contact__subtitle text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        {{ currentLang === 'fr' 
+          ? 'Nous sommes là pour répondre à toutes vos questions et transformer vos idées en réalité'
+          : 'نحن هنا للإجابة على جميع أسئلتك وتحويل أفكارك إلى واقع'
+        }}
       </p>
     </div>
 
-    <!-- Main Grid avec Espacement Harmonieux -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-      
-      <!-- Left: Contact Info - Design Épuré -->
-      <div class="space-y-6" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
-        
-        <!-- Info Cards avec Design Minimaliste -->
-        <div class="space-y-4">
-          <div *ngFor="let info of contactInfo; let i = index"
-               class="group relative"
-               [class.transform]="true"
-               [style.transition-delay]="i * 50 + 'ms'">
-            
-            <div class="flex items-center gap-4 p-5 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 
-                        hover:border-cyan-500/30 hover:bg-card/80 transition-all duration-500 hover:scale-[1.02]">
-              
-              <!-- Icon Container Minimal -->
-              <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/10 to-blue-500/10 
-                          flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <lucide-icon [img]="info.icon" class="h-5 w-5 text-cyan-400"></lucide-icon>
-              </div>
-              
-              <!-- Text Content -->
-              <div>
-                <div class="text-xs text-muted-foreground/70 mb-0.5 font-light">{{ info.label }}</div>
-                <div class="text-base font-medium">{{ info.value }}</div>
+    <!-- Contact Info Cards avec design 3D -->
+    <div class="contact__info-grid grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 perspective-1000">
+      <!-- Email Card -->
+      <div class="info-card group relative transform-gpu transition-all duration-700 hover:scale-105 hover:rotate-y-6">
+        <div class="info-card__inner relative bg-white/80 dark:bg-card/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-white/10 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/30 transition-all duration-700 hover:-translate-y-4">
+          <!-- Effet de lumière -->
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 dark:from-cyan-500/20 dark:to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          
+          <!-- Bordure animée -->
+          <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-cyan-500/30 transition-all duration-700"></div>
+          
+          <div class="info-card__content relative flex flex-col items-center text-center">
+            <!-- Icône avec halo -->
+            <div class="info-card__icon-wrapper relative mb-6">
+              <div class="absolute inset-0 bg-cyan-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-700"></div>
+              <div class="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 p-[2px]">
+                <div class="w-full h-full rounded-2xl bg-white dark:bg-card flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                  <svg class="info-card__icon h-10 w-10 text-cyan-600 dark:text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 8L9 12L15 8M5 20H19C20.1046 20 21 19.1046 21 18V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20Z" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
               </div>
             </div>
+            
+            <div class="info-card__text">
+              <p class="info-card__label text-sm uppercase tracking-wider text-gray-500 dark:text-white/40 mb-2">{{ currentLang === 'fr' ? 'Email' : 'البريد الإلكتروني' }}</p>
+              <p class="info-card__value text-xl font-semibold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-700">contact@lambda-soft.com</p>
+            </div>
           </div>
-        </div>
-
-        <!-- Quick Actions - Design Moderne -->
-        <div class="grid grid-cols-2 gap-3 pt-4">
-          
-          <!-- Chat Button - Version Épurée -->
-          <button (click)="onSubmit($event)"
-                  class="group relative p-4 rounded-xl bg-card/30 backdrop-blur-sm border border-border/50 
-                         hover:border-cyan-500/30 transition-all duration-500 hover:bg-card/50
-                         focus:outline-none focus:ring-2 focus:ring-cyan-500/30">
-            
-            <lucide-icon [img]="MessageSquare" class="h-6 w-6 text-cyan-400/70 mb-2 mx-auto group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500"></lucide-icon>
-            <div class="text-xs font-medium">{{ currentLang === 'fr' ? 'Chat' : 'دردشة' }}</div>
-            <div class="text-[10px] text-muted-foreground/60 mt-0.5">{{ currentLang === 'fr' ? '24/7' : '٢٤/٧' }}</div>
-          </button>
-
-          <!-- Calendar Button - Version Épurée -->
-          <button (click)="onSubmit($event)"
-                  class="group relative p-4 rounded-xl bg-card/30 backdrop-blur-sm border border-border/50 
-                         hover:border-cyan-500/30 transition-all duration-500 hover:bg-card/50
-                         focus:outline-none focus:ring-2 focus:ring-cyan-500/30">
-            
-            <lucide-icon [img]="Calendar" class="h-6 w-6 text-cyan-400/70 mb-2 mx-auto group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500"></lucide-icon>
-            <div class="text-xs font-medium">{{ currentLang === 'fr' ? 'Call' : 'مكالمة' }}</div>
-            <div class="text-[10px] text-muted-foreground/60 mt-0.5">{{ currentLang === 'fr' ? 'Réserver' : 'احجز' }}</div>
-          </button>
         </div>
       </div>
 
-      <!-- Right: Contact Form - Design Flottant -->
-      <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
-        
-        <form (ngSubmit)="onSubmit($event)" 
-              class="relative p-6 md:p-8 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/50
-                     hover:border-cyan-500/30 transition-all duration-700 hover:shadow-2xl hover:shadow-cyan-500/5">
+      <!-- Phone Card (similaire mais avec dégradé différent) -->
+      <div class="info-card group relative transform-gpu transition-all duration-700 hover:scale-105 hover:rotate-y-6">
+        <div class="info-card__inner relative bg-white/80 dark:bg-card/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-white/10 shadow-2xl shadow-blue-500/10 hover:shadow-blue-500/30 transition-all duration-700 hover:-translate-y-4">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-500/30 transition-all duration-700"></div>
           
-          <!-- Form Fields - Espacés et Aérés -->
-          <div class="relative space-y-5">
-            
-            <!-- Name Field - Design Minimal -->
-            <div>
-              <label for="name" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
-                {{ t('contact.name') }}
-              </label>
-              <input type="text"
-                     id="name"
-                     name="name"
-                     [(ngModel)]="formData.name"
-                     required
-                     (focus)="onFocus('name')"
-                     (blur)="onBlur()"
-                     class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
-                            focus:border-cyan-500/50 focus:outline-none transition-all duration-500
-                            text-foreground text-sm backdrop-blur-sm"
-                     [class.border-cyan-500/50]="focusedField === 'name'">
-            </div>
-
-            <!-- Email Field - Design Minimal -->
-            <div>
-              <label for="email" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
-                {{ t('contact.email') }}
-              </label>
-              <input type="email"
-                     id="email"
-                     name="email"
-                     [(ngModel)]="formData.email"
-                     required
-                     (focus)="onFocus('email')"
-                     (blur)="onBlur()"
-                     class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
-                            focus:border-cyan-500/50 focus:outline-none transition-all duration-500
-                            text-foreground text-sm backdrop-blur-sm"
-                     [class.border-cyan-500/50]="focusedField === 'email'">
-            </div>
-
-            <!-- Message Field - Design Minimal -->
-            <div>
-              <label for="message" class="block mb-1.5 text-xs font-light text-muted-foreground/70">
-                {{ t('contact.message') }}
-              </label>
-              <textarea id="message"
-                        name="message"
-                        rows="4"
-                        [(ngModel)]="formData.message"
-                        required
-                        (focus)="onFocus('message')"
-                        (blur)="onBlur()"
-                        class="w-full px-4 py-3 rounded-lg bg-background/50 border border-border/50 
-                               focus:border-cyan-500/50 focus:outline-none transition-all duration-500
-                               resize-none text-foreground text-sm backdrop-blur-sm"
-                        [class.border-cyan-500/50]="focusedField === 'message'">
-              </textarea>
-            </div>
-
-            <!-- Submit Button - Design Épuré -->
-            <button type="submit"
-                    class="group relative w-full py-3.5 rounded-lg overflow-hidden
-                           bg-gradient-to-r from-cyan-500/90 to-blue-500/90
-                           hover:from-cyan-400 hover:to-blue-400
-                           transition-all duration-500 hover:scale-[1.02]
-                           focus:outline-none focus:ring-2 focus:ring-cyan-500/50">
-              
-              <!-- Button Content -->
-              <div class="relative z-10 flex items-center justify-center gap-2 text-white text-sm font-light">
-                {{ t('contact.send') }}
-                <lucide-icon [img]="Send" class="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300"></lucide-icon>
+          <div class="info-card__content relative flex flex-col items-center text-center">
+            <div class="info-card__icon-wrapper relative mb-6">
+              <div class="absolute inset-0 bg-blue-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-700"></div>
+              <div class="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-[2px]">
+                <div class="w-full h-full rounded-2xl bg-white dark:bg-card flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                  <svg class="info-card__icon h-10 w-10 text-blue-600 dark:text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 5C3 3.89543 3.89543 3 5 3H8.27924C8.70967 3 9.09181 3.27543 9.22792 3.68377L10.7257 8.17721C10.8831 8.64932 10.6694 9.16531 10.2243 9.38787L7.96701 10.5165C9.06925 12.9612 11.0388 14.9308 13.4835 16.033L14.6121 13.7757C14.8347 13.3306 15.3507 13.1169 15.8228 13.2743L20.3162 14.7721C20.7246 14.9082 21 15.2903 21 15.7208V19C21 20.1046 20.1046 21 19 21H18C9.71573 21 3 14.2843 3 6V5Z" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
               </div>
-            </button>
+            </div>
+            
+            <div class="info-card__text">
+              <p class="info-card__label text-sm uppercase tracking-wider text-gray-500 dark:text-white/40 mb-2">{{ currentLang === 'fr' ? 'Téléphone' : 'الهاتف' }}</p>
+              <p class="info-card__value text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-700">+212 522 31 31 25</p>
+            </div>
           </div>
-        </form>
+        </div>
+      </div>
+
+      <!-- Hours Card -->
+      <div class="info-card group relative transform-gpu transition-all duration-700 hover:scale-105 hover:rotate-y-6">
+        <div class="info-card__inner relative bg-white/80 dark:bg-card/50 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-white/10 shadow-2xl shadow-purple-500/10 hover:shadow-purple-500/30 transition-all duration-700 hover:-translate-y-4">
+          <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-500/20 dark:to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-purple-500/30 transition-all duration-700"></div>
+          
+          <div class="info-card__content relative flex flex-col items-center text-center">
+            <div class="info-card__icon-wrapper relative mb-6">
+              <div class="absolute inset-0 bg-purple-500 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-700"></div>
+              <div class="relative w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 p-[2px]">
+                <div class="w-full h-full rounded-2xl bg-white dark:bg-card flex items-center justify-center group-hover:scale-110 transition-transform duration-700">
+                  <svg class="info-card__icon h-10 w-10 text-purple-600 dark:text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6V12L16 14" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            <div class="info-card__text">
+              <p class="info-card__label text-sm uppercase tracking-wider text-gray-500 dark:text-white/40 mb-2">{{ currentLang === 'fr' ? 'Horaires' : 'ساعات العمل' }}</p>
+              <p class="info-card__value text-xl font-semibold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-700">{{ currentLang === 'fr' ? 'Lun-Ven: 9h - 18h' : 'الإثنين-الجمعة: ٩ص - ٦م' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Grid avec design asymétrique -->
+    <div class="contact__main-grid grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Contact Form - 7 colonnes -->
+      <div class="lg:col-span-7">
+        <div class="contact__form-wrapper relative">
+          <!-- Élément décoratif -->
+          <div class="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
+          
+          <div class="form-card relative bg-white/90 dark:bg-card/60 backdrop-blur-xl rounded-3xl p-10 border border-gray-200/50 dark:border-white/10 shadow-2xl">
+            <!-- Bande décorative -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-t-3xl"></div>
+            
+            <div class="form-card__header mb-10">
+              <h2 class="form-card__title text-3xl font-bold text-gray-900 dark:text-white mb-3">
+                {{ currentLang === 'fr' ? 'Envoyez-nous un message' : 'أرسل لنا رسالة' }}
+              </h2>
+              <p class="form-card__subtitle text-muted-foreground text-lg">
+                {{ currentLang === 'fr' ? 'Nous vous répondrons dans les plus brefs délais' : 'سوف نقوم بالرد عليك في أقرب وقت ممكن' }}
+              </p>
+            </div>
+
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form space-y-6">
+              <div class="form__grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form__group">
+                  <label class="form__label block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ currentLang === 'fr' ? 'Nom complet *' : 'الاسم الكامل *' }}
+                  </label>
+                  <input 
+                    type="text" 
+                    formControlName="name"
+                    class="form__input w-full px-5 py-4 rounded-2xl bg-white dark:bg-card border border-gray-200 dark:border-white/10 
+                           focus:border-gray-400 dark:focus:border-gray-500 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700
+                           text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40
+                           transition-all duration-300"
+                    [class.border-red-500]="isFieldInvalid('name')"
+                    [placeholder]="currentLang === 'fr' ? 'Jean Dupont' : 'جان دوبون'"
+                    required>
+                  <div *ngIf="isFieldInvalid('name')" class="text-red-500 text-sm mt-1">
+                    {{ getFieldError('name') }}
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ currentLang === 'fr' ? 'Email *' : 'البريد الإلكتروني *' }}
+                  </label>
+                  <input 
+                    type="email" 
+                    formControlName="email"
+                    class="form__input w-full px-5 py-4 rounded-2xl bg-white dark:bg-card border border-gray-200 dark:border-white/10 
+                           focus:border-gray-400 dark:focus:border-gray-500 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700
+                           text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40
+                           transition-all duration-300"
+                    [class.border-red-500]="isFieldInvalid('email')"
+                    [placeholder]="currentLang === 'fr' ? 'jean@exemple.com' : 'جان@مثال.كوم'"
+                    required>
+                  <div *ngIf="isFieldInvalid('email')" class="text-red-500 text-sm mt-1">
+                    {{ getFieldError('email') }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form__grid grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form__group">
+                  <label class="form__label block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ currentLang === 'fr' ? 'Téléphone *' : 'الهاتف *' }}
+                  </label>
+                  <input 
+                    type="tel" 
+                    formControlName="phone"
+                    class="form__input w-full px-5 py-4 rounded-2xl bg-white dark:bg-card border border-gray-200 dark:border-white/10 
+                           focus:border-gray-400 dark:focus:border-gray-500 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700
+                           text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40
+                           transition-all duration-300"
+                    [class.border-red-500]="isFieldInvalid('phone')"
+                    placeholder="+212 522 31 31 25"
+                    required>
+                  <div *ngIf="isFieldInvalid('phone')" class="text-red-500 text-sm mt-1">
+                    {{ getFieldError('phone') }}
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {{ currentLang === 'fr' ? 'Sujet *' : 'الموضوع *' }}
+                  </label>
+                  <div class="relative">
+                    <select 
+                      formControlName="subject"
+                      class="form__select w-full px-5 py-4 rounded-2xl bg-white dark:bg-card border border-gray-200 dark:border-white/10 
+                             focus:border-gray-400 dark:focus:border-gray-500 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700
+                             text-gray-900 dark:text-white appearance-none
+                             transition-all duration-300"
+                      [class.border-red-500]="isFieldInvalid('subject')"
+                      required>
+                      <option value="" disabled selected>{{ currentLang === 'fr' ? 'Choisissez un sujet' : 'اختر موضوعًا' }}</option>
+                      <option value="information">{{ currentLang === 'fr' ? "Demande d'information" : 'طلب معلومات' }}</option>
+                      <option value="support">{{ currentLang === 'fr' ? 'Support technique' : 'الدعم الفني' }}</option>
+                      <option value="collaboration">{{ currentLang === 'fr' ? 'Collaboration' : 'تعاون' }}</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                      <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div *ngIf="isFieldInvalid('subject')" class="text-red-500 text-sm mt-1">
+                    {{ getFieldError('subject') }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  {{ currentLang === 'fr' ? 'Message *' : 'الرسالة *' }}
+                </label>
+                <textarea 
+                  formControlName="message"
+                  rows="5"
+                  class="form__textarea w-full px-5 py-4 rounded-2xl bg-white dark:bg-card border border-gray-200 dark:border-white/10 
+                         focus:border-gray-400 dark:focus:border-gray-500 focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700
+                         text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-white/40
+                         transition-all duration-300 resize-none"
+                  [class.border-red-500]="isFieldInvalid('message')"
+                  [placeholder]="currentLang === 'fr' ? 'Décrivez votre projet...' : 'صف مشروعك...'"
+                  required></textarea>
+                <div *ngIf="isFieldInvalid('message')" class="text-red-500 text-sm mt-1">
+                  {{ getFieldError('message') }}
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                [disabled]="isSubmitted"
+                class="form__submit relative w-full px-8 py-5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 
+                       hover:from-cyan-600 hover:to-blue-700 text-white font-semibold text-lg
+                       transform transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl
+                       hover:shadow-cyan-500/30 disabled:opacity-50 disabled:cursor-not-allowed
+                       disabled:hover:translate-y-0 disabled:hover:shadow-none overflow-hidden group">
+                <!-- Effet de brillance -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
+                <span *ngIf="!isSubmitted" class="relative flex items-center justify-center gap-2">
+                  {{ currentLang === 'fr' ? 'Envoyer le message' : 'إرسال الرسالة' }}
+                  <svg class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                
+                <span *ngIf="isSubmitted" class="flex items-center justify-center gap-2">
+                  <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                  </svg>
+                  {{ currentLang === 'fr' ? 'Envoi en cours...' : 'جاري الإرسال...' }}
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions & Map - 5 colonnes -->
+      <div class="lg:col-span-5 space-y-8">
+        <!-- Chatbot -->
+  <!-- Chatbot -->
+<!-- Chatbot -->
+<button class="action-btn group relative w-full"
+        (click)="onActionClick('Chatbot')">
+  <div class="relative bg-white/90 dark:bg-card/60 backdrop-blur-xl rounded-2xl p-6 
+              border border-purple-500/30 hover:border-gray-200/50 dark:border-white/10
+              overflow-hidden transition-all duration-500 hover:-translate-y-1
+              shadow-xl shadow-purple-500/20">
+    <!-- Hover gradient -->
+    <div class="absolute inset-0 bg-gradient-to-r 
+                from-purple-500/10 to-pink-600/10 
+                dark:from-purple-500/20 dark:to-pink-600/20 
+                opacity-0 group-hover:opacity-100 
+                transition-opacity duration-500">
+    </div>
+    <!-- Shine -->
+    <div class="absolute inset-0 bg-gradient-to-r 
+                from-transparent via-white/10 to-transparent 
+                -translate-x-full group-hover:translate-x-full 
+                transition-transform duration-1000">
+    </div>
+    <!-- FLEX CONTAINER -->
+    <div class="relative flex items-center justify-between gap-5">
+      <!-- ICON - Toujours au début (order-1) -->
+      <div class="w-16 h-16 rounded-xl 
+                  bg-gradient-to-r from-purple-500 to-pink-600 p-[2px] order-1">
+        <div class="w-full h-full rounded-xl bg-white dark:bg-card 
+                    flex items-center justify-center 
+                    group-hover:scale-110 transition-transform duration-500">
+          <svg class="h-8 w-8 text-purple-600 dark:text-purple-500"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="4" y="7" width="16" height="10" rx="3"/>
+            <circle cx="9" cy="12" r="1.5" fill="currentColor"/>
+            <circle cx="15" cy="12" r="1.5" fill="currentColor"/>
+            <path d="M12 4V7" stroke-linecap="round"/>
+            <circle cx="12" cy="3" r="1" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+      <!-- TEXT - Toujours au milieu (order-2) -->
+      <div class="flex-1 order-2"
+           [ngClass]="{
+             'text-right': currentLang === 'ar', 
+             'text-left': currentLang !== 'ar'   
+           }">
+        <span class="block text-xl font-semibold text-gray-900 dark:text-white mb-1">
+          {{ currentLang === 'fr' ? 'Chatbot IA' : 'الدردشة الآلية' }}
+        </span>
+        <span class="block text-base text-gray-600 dark:text-white/60">
+          {{ currentLang === 'fr' ? 'Assistance 24/7' : 'مساعدة على مدار الساعة' }}
+        </span>
+      </div>
+      <!-- ARROW - Toujours à la fin (order-3) -->
+      <div class="order-3">
+        <svg class="h-6 w-6 text-gray-400 
+                    group-hover:text-purple-500 transition-all duration-300"
+             [ngClass]="{
+               'rotate-180 group-hover:-translate-x-1': currentLang === 'ar',
+               'group-hover:translate-x-1': currentLang !== 'ar'
+             }"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor">
+          <path d="M9 5l7 7-7 7"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</button>
+        <!-- Map Card avec design artistique -->
+        <div class="contact__map-card relative group">
+          <!-- Éléments décoratifs -->
+          <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-3xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+          
+          <div class="map-card relative bg-white/90 dark:bg-card/60 backdrop-blur-xl rounded-3xl p-8 border border-gray-200/50 dark:border-white/10 overflow-hidden">
+            <!-- Bande décorative latérale -->
+            <div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-cyan-500/10 to-transparent"></div>
+            
+            <div class="map-card__header flex items-center gap-4 mb-6">
+              <div class="relative">
+                <div class="absolute inset-0 bg-cyan-500 rounded-xl blur-md opacity-50"></div>
+                <div class="relative w-14 h-14 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 p-[2px]">
+                  <div class="w-full h-full rounded-xl bg-white dark:bg-card flex items-center justify-center">
+                    <svg class="map-card__icon h-7 w-7 text-cyan-600 dark:text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <circle cx="12" cy="11" r="3"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="map-card__title text-2xl font-bold text-gray-900 dark:text-white">
+                  {{ currentLang === 'fr' ? 'Notre localisation' : 'موقعنا' }}
+                </h4>
+                <p class="text-sm text-gray-500 dark:text-white/40">Casablanca, Maroc</p>
+              </div>
+            </div>
+            
+            <div class="map-card__content">
+              <!-- Carte stylisée -->
+              <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/20">
+                <!-- Grille de points décorative -->
+                <div class="absolute inset-0" 
+                     style="background-image: radial-gradient(circle at 10px 10px, rgba(6, 182, 212, 0.1) 1px, transparent 1px); 
+                            background-size: 20px 20px;">
+                </div>
+                
+                <!-- Lignes de contour de carte -->
+                <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <path d="M20,20 L80,20 L80,80 L20,80 Z" 
+                        stroke="url(#grad1)" 
+                        stroke-width="0.5" 
+                        fill="none" 
+                        stroke-dasharray="4 4"/>
+                  <path d="M30,30 L70,30 L70,70 L30,70 Z" 
+                        stroke="url(#grad1)" 
+                        stroke-width="0.5" 
+                        fill="none" 
+                        stroke-dasharray="4 4"/>
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#06b6d4" />
+                      <stop offset="100%" stop-color="#3b82f6" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                
+                <!-- Cercles concentriques décoratifs -->
+                <div class="absolute top-1/4 left-1/4 w-16 h-16 rounded-full border border-cyan-500/30"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-24 h-24 rounded-full border border-blue-500/20"></div>
+                
+                <!-- Marqueur de localisation animé -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div class="relative">
+                    <div class="absolute -inset-4 bg-cyan-500 rounded-full animate-ping opacity-30"></div>
+                    <div class="relative w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/50">
+                      <div class="w-4 h-4 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Lignes de longitude/latitude stylisées -->
+                <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+                  <line x1="0" y1="50" x2="100" y2="50" stroke="#06b6d4" stroke-width="0.3" stroke-dasharray="2 2"/>
+                  <line x1="50" y1="0" x2="50" y2="100" stroke="#3b82f6" stroke-width="0.3" stroke-dasharray="2 2"/>
+                </svg>
+              </div>
+              
+              <p class="map-card__address text-gray-600 dark:text-white/80 mb-4 text-lg leading-relaxed">
+                LAMBDA SOFT<br />
+                <span class="font-light">{{ currentLang === 'fr' ? '123 Avenue Mohammed V' : '۱۲۳ شارع محمد الخامس' }}</span><br />
+                <span class="font-light">{{ currentLang === 'fr' ? '20000 Casablanca, Maroc' : '۲۰۰۰۰ الدار البيضاء، المغرب' }}</span>
+              </p>
+              
+              <a href="https://maps.google.com" target="_blank" 
+                 class="map-card__link inline-flex items-center gap-2 text-cyan-600 dark:text-cyan-500 
+                        hover:text-cyan-700 dark:hover:text-cyan-400 transition-all duration-300 group/link
+                        font-medium text-lg">
+                <span>{{ currentLang === 'fr' ? 'Voir sur Google Maps' : 'عرض على خرائط جوجل' }}</span>
+                <svg class="map-card__link-icon h-5 w-5 group-hover/link:translate-x-1 transition-transform" 
+                     [ngClass]="{'rotate-180': currentLang === 'ar'}" 
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

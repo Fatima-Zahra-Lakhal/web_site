@@ -2,37 +2,35 @@
   @slideDown
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
   [ngClass]="{
-    'bg-gray-900/30 backdrop-blur-xl border-b border-gray-800 shadow-lg shadow-cyan-500/10': isHomeSection && !scrolled,
-    'bg-gray-900/70 backdrop-blur-xl border-b border-gray-800 shadow-lg shadow-cyan-500/10': isHomeSection && scrolled,
-    'bg-background/80 backdrop-blur-xl border-b border-border shadow-lg': !isHomeSection
+    'bg-transparent md:bg-transparent backdrop-blur-3xl backdrop-blur-none border-b border-transparent shadow-none': !scrolled,
+    'bg-white/95 md:bg-white/95 dark:bg-gray-900/95 backdrop-blur-md backdrop-blur-3xl border-b border-gray-200 dark:border-gray-800 shadow-lg': scrolled
   }">
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+  
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
 
       <!-- Logo -->
-      <div>
+      <div class="relative z-10">
         <img src="assets/lambdasoft.png"
              class="h-20 cursor-pointer"
              (click)="scrollToSection('home')" />
       </div>
 
-      <!-- Navigation -->
+      <!-- Navigation Desktop -->
       <nav
-        class="hidden md:flex items-center space-x-2 rounded-full px-3 py-2 border"
+        class="hidden md:flex items-center space-x-2 rounded-full px-3 py-2 transition-all duration-500 relative z-10"
         [ngClass]="{
-          'bg-gray-800/40 border-gray-700': isHomeSection,
-          'bg-card/50 border-border': !isHomeSection
+          'bg-white/10 backdrop-blur-none border border-transparent': !scrolled,
+          'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md': scrolled
         }">
 
         <button
           *ngFor="let item of navItems"
           (click)="scrollToSection(item.id)"
-          class="px-5 py-2 rounded-full text-sm font-medium transition-colors"
+          class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300"
           [ngClass]="{
-            'text-gray-200 hover:text-cyan-400': isHomeSection,
-            'text-foreground hover:text-cyan-500': !isHomeSection
+            'text-gray-200 dark:text-gray-300 hover:text-cyan-400': !scrolled,
+            'text-gray-700 dark:text-gray-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-gray-100 dark:hover:bg-gray-700/50': scrolled
           }">
 
           {{ languageService.t(item.key) }}
@@ -41,29 +39,29 @@
       </nav>
 
       <!-- Right Buttons -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 relative z-10">
 
         <!-- Language -->
         <button
           (click)="toggleLanguage()"
-          class="p-3 rounded-xl border transition-all flex items-center gap-2"
+          class="p-3 rounded-xl border transition-all duration-500 flex items-center gap-2"
           [ngClass]="{
-            'bg-gray-800/40 border-gray-700 text-gray-200': isHomeSection,
-            'bg-card/50 border-border text-foreground': !isHomeSection
+            'bg-white/10 md:bg-white/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-none': !scrolled,
+            'bg-white md:bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
           }">
 
           <lucide-icon [img]="Globe" size="18"></lucide-icon>
-          <span>{{ languageService.language() }}</span>
+          <span>{{ languageService.language() | uppercase }}</span>
 
         </button>
 
         <!-- Theme -->
         <button
           (click)="toggleTheme()"
-          class="p-3 rounded-xl border transition-all flex items-center gap-2"
+          class="p-3 rounded-xl border transition-all duration-500 flex items-center gap-2"
           [ngClass]="{
-            'bg-gray-800/40 border-gray-700 text-gray-200': isHomeSection,
-            'bg-card/50 border-border text-foreground': !isHomeSection
+            'bg-white/10 md:bg-white/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-none': !scrolled,
+            'bg-white md:bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
           }">
 
           <lucide-icon
@@ -78,15 +76,41 @@
 
         </button>
 
-        <!-- Mobile -->
+        <!-- Mobile Menu Button -->
         <button
-          class="md:hidden p-3 rounded-xl border bg-card/50 border-border"
+          class="md:hidden p-3 rounded-xl border transition-all duration-500"
+          [ngClass]="{
+            'bg-white/10 dark:bg-gray-800/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-sm': !scrolled,
+            'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
+          }"
           (click)="toggleMenu()">
           <span *ngIf="!mobileMenuOpen">☰</span>
           <span *ngIf="mobileMenuOpen">✕</span>
         </button>
 
       </div>
+    </div>
+
+    <!-- Mobile Menu (UNIQUEMENT le menu qui s'affiche quand on clique) -->
+    <div *ngIf="mobileMenuOpen" 
+         @mobileMenu
+         class="md:hidden overflow-hidden rounded-b-2xl absolute left-0 right-0 top-20 mx-4 z-20
+                bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
+      
+      <nav class="py-2 px-2">
+        
+        <button
+          *ngFor="let item of navItems"
+          (click)="scrollToSection(item.id); toggleMenu()"
+          class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors
+                 text-gray-700 dark:text-gray-200 hover:text-cyan-600 dark:hover:text-cyan-400 
+                 hover:bg-gray-100 dark:hover:bg-gray-800">
+
+          {{ languageService.t(item.key) }}
+
+        </button>
+        
+      </nav>
     </div>
 
   </div>

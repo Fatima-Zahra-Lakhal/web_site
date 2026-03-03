@@ -17,7 +17,7 @@ const translations = {
     // Hero
     'hero.title': 'Solutions Logicielles',
     'hero.subtitle': 'Innovantes',
-    'hero.description': 'Transformez votre entreprise avec des solutions logicielles sur mesure. Lambda Soft vous accompagne dans votre transformation numérique.',
+    'hero.description': 'Transformez votre entreprise avec des solutions logicielles sur mesure. Lambda Soft, expert en innovation digitale, vous accompagne dans votre transformation numérique pour maximiser votre performance et votre compétitivité.',
     'hero.cta': 'Découvrir nos services',
     'hero.contact': 'Nous contacter',
     'hero.scroll': 'Défiler', // Ajouté
@@ -27,7 +27,7 @@ const translations = {
     // Services
     'services.title': 'Nos Services',
     'services.badge': 'SERVICES', 
-    'services.subtitle': 'Des solutions adaptées à vos besoins',
+'services.subtitle': 'Nous concevons des solutions digitales adaptées à votre activité afin de maximiser votre efficacité, renforcer votre compétitivité et soutenir votre développement.',
     'services.dev.title': 'Développement d\'applications',
     'services.dev.description': 'Solutions digitales sur mesure, combinant expertise technique et connaissance métier pour répondre à vos besoins spécifiques.',
     'services.security.title': 'Sécurité des applications',
@@ -82,7 +82,7 @@ const translations = {
     // Hero
     'hero.title': 'حلول برمجية',
     'hero.subtitle': 'مبتكرة',
-    'hero.description': 'حوّل عملك بحلول برمجية مخصصة. LAMBDA SOFT ترافقك في تحولك الرقمي.',
+   'hero.description': 'حوّل عملك بحلول برمجية مخصصة. LAMBDA SOFT ترافقك في تحولك الرقمي. ندمج الإبداع بالتكنولوجيا لبناء مستقبل رقمي أقوى.',
     'hero.cta': 'اكتشف خدماتنا',
     'hero.contact': 'اتصل بنا',
     'hero.scroll': 'مرر للأسفل', // Ajouté
@@ -92,7 +92,7 @@ const translations = {
     // Services
     'services.title': 'خدماتنا',
     'services.badge': 'خدمات',
-    'services.subtitle': 'حلول مصممة لاحتياجاتك',
+  'services.subtitle': 'نطوّر حلولاً متكاملة ومرنة تتناسب مع طبيعة نشاطك، بهدف تعزيز الكفاءة وتحقيق أفضل النتائج.',
     'services.dev.title': 'تطوير التطبيقات',
     'services.dev.description': 'حلول رقمية مخصصة تجمع بين الخبرة التقنية ومعرفة المجال لتلبية احتياجاتك الخاصة.',
     'services.security.title': 'أمن التطبيقات',

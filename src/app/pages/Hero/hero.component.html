@@ -2,14 +2,11 @@
   #section
   id="home"
   class="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+  style="font-family: 'Inter', sans-serif;"
+  [attr.dir]="languageService.language() === 'ar' ? 'rtl' : 'ltr'"
 >
-
-  <!-- VIDEO BACKGROUND LOCALE (assets/bg-2.mp4) -->
+  <!-- VIDEO BACKGROUND -->
   <div class="absolute inset-0 w-full h-full">
-    <!-- Overlay sombre plus prononcé pour le mode dark -->
-    <div class="absolute inset-0 bg-black/60 z-10"></div>
-    
-    <!-- Vidéo locale depuis le dossier assets -->
     <video 
       autoplay 
       loop 
@@ -19,148 +16,242 @@
       class="absolute inset-0 w-full h-full object-cover"
     >
       <source src="assets/bg-1.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas la vidéo.
     </video>
+    
+    <!-- OVERLAYS GRADIENT -->
+    <div class="absolute inset-0 bg-black/40 z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/70 z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/40 z-10"></div>
+    <div class="absolute inset-0 backdrop-blur-[1px] z-10"></div>
   </div>
 
-  <!-- GRID BACKGROUND - plus visible en dark -->
-  <div
-    class="absolute inset-0 pointer-events-none z-30"
-    style="background-image:
-      linear-gradient(to right, rgba(0,200,255,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,200,255,0.05) 1px, transparent 1px);
+  <!-- GRID OVERLAY -->
+  <div class="absolute inset-0 pointer-events-none z-20 opacity-10"
+    style="background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
       background-size: 80px 80px;">
   </div>
 
-  <!-- GRADIENT ORB LEFT - version dark -->
-  <div
-    class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20 animate-orb1 z-30"
-    style="background: radial-gradient(circle, #0088FF 0%, transparent 70%);">
+  <!-- GRADIENTS LUMINEUX -->
+  <div class="absolute top-1/4 -left-48 w-[800px] h-[800px] rounded-full blur-[150px] opacity-20 z-20"
+    style="background: radial-gradient(circle, #3B82F6 0%, transparent 70%);">
+  </div>
+  <div class="absolute bottom-0 -right-48 w-[900px] h-[900px] rounded-full blur-[150px] opacity-20 z-20"
+    style="background: radial-gradient(circle, #1E3A8A 0%, transparent 70%);">
   </div>
 
-  <!-- GRADIENT ORB RIGHT - version dark -->
-  <div
-    class="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px] opacity-15 animate-orb2 z-30"
-    style="background: radial-gradient(circle, #0044AA 0%, transparent 70%);">
-  </div>
+  <!-- MAIN CONTENT AVEC ESPACEMENT AMÉLIORÉ -->
+  <div class="relative w-full max-w-7xl mx-auto px-6 lg:px-8 z-30">
+    
+    <!-- GRID À DEUX COLONNES POUR MEILLEUR ÉQUILIBRE -->
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center min-h-[80vh]">
+      
+      <!-- COLONNE GAUCHE - TEXTE PRINCIPAL -->
+      <div class="lg:col-span-7 space-y-8 mt-20" @fadeUp>
 
-  <!-- PARTICLES - version dark plus lumineuse -->
-  <div *ngFor="let p of particles"
-       class="absolute w-1 h-1 bg-cyan-400 rounded-full animate-particle z-30"
-       [style.left.%]="p.left"
-       [style.top.%]="p.top"
-       [style.animationDuration.s]="p.duration"
-       style="box-shadow: 0 0 15px rgba(6, 182, 212, 1);">
-  </div>
+        <!-- TITLE AVEC HIÉRARCHIE VISUELLE -->
+        <div class="space-y-4">
+          <h1 class="font-['Inter'] tracking-tight">
+            <span class="block text-white/60 font-light text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4">
+              {{ languageService.t('hero.title') }}
+            </span>
+            
+            <span class="block">
+              <span class="font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl bg-gradient-to-r from-white via-blue-200 to-white bg-clip-text text-transparent leading-[1.1] tracking-[-0.03em]">
+                {{ languageService.t('hero.subtitle') }}
+              </span>
+            </span>
+          </h1>
 
-  <!-- CONTENT - version dark avec texte plus clair -->
-  <div class="relative max-w-7xl mx-auto px-4 py-32 text-center z-40">
+          <!-- DESCRIPTION PLUS AÉRÉE -->
+          <p class="text-lg sm:text-xl text-white/70 max-w-2xl leading-relaxed font-light">
+            {{ languageService.t('hero.description') }}
+          </p>
+        </div>
 
-    <!-- BADGE - version dark -->
-    <div
-      class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full relative overflow-hidden group cursor-pointer"
-      @fadeUp
-    >
-      <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/30 to-blue-400/30 backdrop-blur-xl border border-cyan-400/40"></div>
-      <lucide-icon [img]="Sparkles" class="h-4 w-4 text-cyan-300 relative z-10"></lucide-icon>
-      <span class="relative z-10 text-sm text-cyan-300 font-medium">
-        Lambda Soft
-      </span>
-      <lucide-icon [img]="Zap" class="h-4 w-4 text-cyan-300 relative z-10"></lucide-icon>
-    </div>
+        <!-- BOUTONS AVEC MEILLEUR ESPACEMENT -->
+     <div class="flex flex-col sm:flex-row gap-4 pt-4 w-full"
+     [class.sm:flex-row]="languageService.language() !== 'ar'"
+     [class.sm:flex-row-reverse]="languageService.language() === 'ar'"
+     [class.justify-start]="languageService.language() !== 'ar'"
+     [class.justify-end]="languageService.language() === 'ar'">
+  
+  <!-- Premier bouton (CTA) -->
+  <button
+    (click)="scrollToSection('services')"
+    class="group px-8 py-4 bg-white text-gray-900 text-base font-medium rounded-lg hover:bg-white/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-white/10"
+    [class.order-2]="languageService.language() === 'ar'"
+  >
+    <span class="flex items-center gap-2" 
+          [class.flex-row]="languageService.language() !== 'ar'"
+          [class.flex-row-reverse]="languageService.language() === 'ar'">
+      {{ languageService.t('hero.cta') }}
+      <lucide-icon [img]="Zap" 
+                   class="h-4 w-4 transition-transform" 
+                   [class.group-hover:-translate-x-1]="languageService.language() === 'ar'" 
+                   [class.group-hover:translate-x-1]="languageService.language() !== 'ar'"></lucide-icon>
+    </span>
+  </button>
 
-    <!-- TITLE - version dark -->
-    <div @fadeUp>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl leading-none">
-        <span class="block text-white mb-2">
-          {{ languageService.t('hero.title') }}
-        </span>
+  <!-- Deuxième bouton (Contact) -->
+  <button
+    (click)="scrollToSection('contact')"
+    class="px-8 py-4 border-2 border-white/20 text-white text-base font-medium rounded-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm"
+    [class.order-1]="languageService.language() === 'ar'"
+  >
+    {{ languageService.t('hero.contact') }}
+  </button>
+</div>
 
-        <span class="block relative inline-block">
-          <span
-            class="relative z-10 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-            {{ languageService.t('hero.subtitle') }}
+
+        <!-- STATS AVEC DESIGN AMÉLIORÉ -->
+        <div class="grid grid-cols-3 gap-8 pt-8 border-t border-white/10">
+          <div class="text-left" [class.text-right]="languageService.language() === 'ar'">
+            <div class="text-4xl font-light text-white mb-2">150+</div>
+            <div class="text-xs text-white/40 font-medium tracking-wider uppercase">
+              {{ languageService.t('hero.stats.projects') }}
+            </div>
+            <div class="w-12 h-0.5 bg-blue-500/50 mt-3" [class.ml-auto]="languageService.language() === 'ar'" [class.mr-auto]="languageService.language() !== 'ar'"></div>
+          </div>
+
+          <div class="text-left" [class.text-right]="languageService.language() === 'ar'">
+            <div class="text-4xl font-light text-white mb-2">50+</div>
+            <div class="text-xs text-white/40 font-medium tracking-wider uppercase">
+              {{ languageService.t('hero.stats.clients') }}
+            </div>
+            <div class="w-12 h-0.5 bg-blue-500/50 mt-3" [class.ml-auto]="languageService.language() === 'ar'" [class.mr-auto]="languageService.language() !== 'ar'"></div>
+          </div>
+
+          <div class="text-left" [class.text-right]="languageService.language() === 'ar'">
+            <div class="text-4xl font-light text-white mb-2">10+</div>
+            <div class="text-xs text-white/40 font-medium tracking-wider uppercase">
+              {{ languageService.t('hero.stats.years') }}
+            </div>
+            <div class="w-12 h-0.5 bg-blue-500/50 mt-3" [class.ml-auto]="languageService.language() === 'ar'" [class.mr-auto]="languageService.language() !== 'ar'"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLONNE DROITE - ÉLÉMENTS VISUELS -->
+      <div class="lg:col-span-5 hidden lg:block relative mt-10" @fadeUp>
+        <!-- BADGE FLOTTANT - S'ADAPTE À LA LANGUE -->
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 mb-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+             [class.flex-row-reverse]="languageService.language() === 'ar'">
+          <lucide-icon [img]="Sparkles" class="h-4 w-4 text-blue-300"
+                       [class.order-2]="languageService.language() === 'ar'"></lucide-icon>
+          <span class="text-xs text-white/90 font-medium tracking-wider uppercase"
+                [class.text-right]="languageService.language() === 'ar'">
+            Lambda Soft - {{ languageService.language() === 'fr' ? 'Innovation Digitale' : 'الابتكار الرقمي' }}
           </span>
-
-          <span
-            class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 blur-2xl opacity-40 animate-glow">
-          </span>
-        </span>
-      </h1>
-    </div>
-
-    <!-- DESCRIPTION - version dark -->
-    <p
-      @fadeUp
-      class="mt-8 text-xl sm:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
-    >
-      {{ languageService.t('hero.description') }}
-    </p>
-
-    <!-- BUTTONS - version dark -->
-    <div
-      @fadeUp
-      class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12"
-    >
-      <button
-        (click)="scrollToSection('services')"
-        class="group relative px-10 py-5 rounded-2xl overflow-hidden"
-      >
-        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-        <div class="relative z-10 text-white text-lg font-medium">
-          {{ languageService.t('hero.cta') }}
         </div>
-      </button>
+        
+        <!-- CARTE FLOTTANTE PRINCIPALE - VERSION CORRIGÉE -->
+        <div class="relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 shadow-2xl"
+             [class.text-right]="languageService.language() === 'ar'">
+          
+          <!-- ÉLÉMENT DÉCORATIF - POSITION ADAPTATIVE -->
+          <div class="absolute -top-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"
+               [class.-left-4]="languageService.language() !== 'ar'"
+               [class.-right-4]="languageService.language() === 'ar'"></div>
+          
+          <div class="space-y-6">
+            <!-- EN-TÊTE CARTE - VERSION CORRIGÉE -->
+            <div class="flex items-center gap-3"
+                 [class.flex-row-reverse]="languageService.language() === 'ar'">
+              
+              <!-- Icône - Sera à droite en mode RTL -->
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shrink-0"
+                   [class.order-2]="languageService.language() === 'ar'">
+                <lucide-icon [img]="Zap" class="h-5 w-5 text-white"></lucide-icon>
+              </div>
+              
+              <!-- Texte - S'alignera à droite en mode RTL -->
+              <div class="flex-1" [class.text-right]="languageService.language() === 'ar'">
+                <h3 class="text-white font-medium">
+                  {{ languageService.language() === 'fr' ? 'Innovation & Excellence' : 'الابتكار والتميز' }}
+                </h3>
+                <p class="text-xs text-white/40">
+                  {{ languageService.language() === 'fr' ? 'Solutions sur mesure' : 'حلول مخصصة' }}
+                </p>
+              </div>
+            </div>
 
-      <button
-        (click)="scrollToSection('contact')"
-        class="group relative px-10 py-5 rounded-2xl overflow-hidden"
-      >
-        <div class="absolute inset-0 bg-gray-800 border border-gray-700 backdrop-blur-xl"></div>
-        <div class="relative z-10 text-white text-lg font-medium">
-          {{ languageService.t('hero.contact') }}
-        </div>
-      </button>
-    </div>
+            <!-- LISTE DES SERVICES - VERSION CORRIGÉE -->
+            <div class="space-y-4">
+              
+              <!-- Service 1 -->
+              <div class="flex items-center gap-3 text-white/70"
+                   [class.flex-row-reverse]="languageService.language() === 'ar'">
+                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0"
+                     [class.order-2]="languageService.language() === 'ar'"></div>
+                <span class="text-sm flex-1" [class.text-right]="languageService.language() === 'ar'">
+                  {{ languageService.language() === 'fr' ? 'Développement Web & Mobile' : 'تطوير الويب والجوال' }}
+                </span>
+              </div>
+              
+              <!-- Service 2 -->
+              <div class="flex items-center gap-3 text-white/70"
+                   [class.flex-row-reverse]="languageService.language() === 'ar'">
+                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0"
+                     [class.order-2]="languageService.language() === 'ar'"></div>
+                <span class="text-sm flex-1" [class.text-right]="languageService.language() === 'ar'">
+                  {{ languageService.language() === 'fr' ? 'Cloud & Infrastructure' : 'السحابة والبنية التحتية' }}
+                </span>
+              </div>
+              
+              <!-- Service 3 -->
+              <div class="flex items-center gap-3 text-white/70"
+                   [class.flex-row-reverse]="languageService.language() === 'ar'">
+                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0"
+                     [class.order-2]="languageService.language() === 'ar'"></div>
+                <span class="text-sm flex-1" [class.text-right]="languageService.language() === 'ar'">
+                  {{ languageService.language() === 'fr' ? 'Intelligence Artificielle' : 'الذكاء الاصطناعي' }}
+                </span>
+              </div>
+              
+              <!-- Service 4 -->
+              <div class="flex items-center gap-3 text-white/70"
+                   [class.flex-row-reverse]="languageService.language() === 'ar'">
+                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full shrink-0"
+                     [class.order-2]="languageService.language() === 'ar'"></div>
+                <span class="text-sm flex-1" [class.text-right]="languageService.language() === 'ar'">
+                  {{ languageService.language() === 'fr' ? 'Cybersécurité' : 'الأمن السيبراني' }}
+                </span>
+              </div>
+            </div>
 
-    <!-- STATS - version dark avec traduction -->
-    <div class="flex flex-wrap justify-center gap-12 mt-20 mb-16" @fadeUp>
-      <div class="text-center">
-        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          150+
+            <!-- MÉTRIQUES DE LA CARTE - VERSION CORRIGÉE -->
+            <div class="pt-4 border-t border-white/10">
+              
+              <!-- Label et valeur -->
+              <div class="flex justify-between items-center text-sm"
+                   [class.flex-row-reverse]="languageService.language() === 'ar'">
+                <span class="text-white/40" [class.text-right]="languageService.language() === 'ar'">
+                  {{ languageService.language() === 'fr' ? 'Taux de satisfaction' : 'معدل الرضا' }}
+                </span>
+                <span class="text-white font-medium">98%</span>
+              </div>
+              
+              <!-- Barre de progression - Version corrigée -->
+              <div class="w-full h-1.5 bg-white/10 rounded-full mt-2">
+                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full"
+                     [style.width.%]="98"
+                     [class.ml-auto]="languageService.language() === 'ar'"
+                     [class.mr-auto]="languageService.language() !== 'ar'"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="text-sm text-gray-400">
-          {{ languageService.t('hero.stats.projects') }}
-        </div>
+        
+        <!-- ÉLÉMENTS FLOTTANTS SECONDAIRES - POSITIONS CORRIGÉES -->
+        <div class="absolute -bottom-6 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+             [class.-left-6]="languageService.language() !== 'ar'"
+             [class.-right-6]="languageService.language() === 'ar'"></div>
+        <div class="absolute -top-6 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl"
+             [class.-right-6]="languageService.language() !== 'ar'"
+             [class.-left-6]="languageService.language() === 'ar'"></div>
       </div>
-
-      <div class="text-center">
-        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          50+
-        </div>
-        <div class="text-sm text-gray-400">
-          {{ languageService.t('hero.stats.clients') }}
-        </div>
-      </div>
-
-      <div class="text-center">
-        <div class="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          10+
-        </div>
-        <div class="text-sm text-gray-400">
-          {{ languageService.t('hero.stats.years') }}
-        </div>
-      </div>
     </div>
-
   </div>
-
-  <!-- SCROLL INDICATOR - version dark -->
-  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce z-40">
-    <div class="text-xs text-gray-400 uppercase tracking-wider">
-      {{ languageService.t('hero.scroll') }}
-    </div>
-    <div class="w-[2px] h-12 bg-gradient-to-b from-cyan-500 to-transparent"></div>
-  </div>
-
 </section>

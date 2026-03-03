@@ -1,10 +1,10 @@
-<section id="about" class="relative py-10 overflow-hidden" [class.rtl]="languageService.language() === 'ar'">
+<section id="about" class="relative py-10 overflow-hidden">
 
   <!-- Animated Background -->
   <div class="absolute inset-0 bg-gradient-to-br from-background via-cyan-500/5 to-background">
     <div class="absolute inset-0 overflow-hidden">
       <div *ngFor="let element of floatingElements; let i = index"
-           class="absolute floating-particle"
+           class="absolute floating-particle hidden md:block" 
            [style.left]="(i * 20 + 10) + '%'"
            [style.top]="(i * 15 + 20) + '%'"
            [style.animation]="'float ' + element.duration + ' ease-in-out infinite'"
@@ -32,7 +32,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-      <!-- Left Column - Text Content -->
+      <!-- Left Column - Text Content (Toujours visible) -->
       <div @fadeLeft class="flex flex-col items-center text-center">
 
         <!-- Title -->
@@ -57,7 +57,7 @@
             <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-0 
                         group-hover:opacity-20 blur transition-all duration-500"></div>
             
-            <!-- HAUTEUR FIXE AJOUTÉE : h-[180px] -->
+            <!-- HAUTEUR FIXE : h-[180px] -->
             <div class="relative bg-card rounded-2xl p-5 border border-border h-[180px] flex flex-col
                         hover:border-cyan-500/50 transition-all duration-500 
                         hover:shadow-2xl hover:shadow-cyan-500/20
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="text-xs text-muted-foreground">
-                  {{ getText(stat.label) }}
+                  {{ stat.label }}
                 </div>
               </div>
 
@@ -105,7 +105,7 @@
                         hover:shadow-lg hover:shadow-cyan-500/20">
               <lucide-icon [img]="value.icon" class="h-4 w-4 text-cyan-500 
                            group-hover:rotate-12 transition-transform duration-500"></lucide-icon>
-              <span class="text-sm font-medium">{{ getText(value.title) }}</span>
+              <span class="text-sm font-medium">{{ value.title }}</span>
             </div>
             
           </div>
@@ -113,8 +113,8 @@
 
       </div>
 
-      <!-- Right Column - Orbital Visual (EXACTEMENT comme dans l'original) -->
-      <div @fadeRight class="relative flex justify-center">
+      <!-- Right Column - Orbital Visual (CACHÉ SUR MOBILE) -->
+      <div @fadeRight class="relative justify-center hidden lg:flex"> <!-- Changé ici : hidden sur mobile, flex sur lg -->
 
         <div class="relative w-[450px] h-[450px]">
 
@@ -195,7 +195,7 @@
                     <!-- Label -->
                     <span class="text-xs font-medium text-muted-foreground
                                  group-hover:text-cyan-400 transition-colors duration-300">
-                      {{ getText(item.label) }}
+                      {{ item.label }}
                     </span>
                     
                     <!-- Points lumineux -->
@@ -226,16 +226,16 @@
 
           <!-- POINTS LUMINEUX -->
           <div class="absolute top-10 right-10 w-2 h-2 rounded-full bg-cyan-400 
-                      animate-float-slow"></div>
+                      animate-float-slow hidden md:block"></div> <!-- Caché sur mobile -->
           <div class="absolute bottom-20 left-10 w-3 h-3 rounded-full bg-blue-400 
-                      animate-float"></div>
+                      animate-float hidden md:block"></div> <!-- Caché sur mobile -->
           <div class="absolute top-40 left-20 w-2 h-2 rounded-full bg-purple-400 
-                      animate-float-fast"></div>
+                      animate-float-fast hidden md:block"></div> <!-- Caché sur mobile -->
           
           <div class="absolute bottom-40 right-20 w-2 h-2 rounded-full bg-cyan-400 
-                      animate-float-slow" style="animation-delay: 0.5s"></div>
+                      animate-float-slow hidden md:block" style="animation-delay: 0.5s"></div> <!-- Caché sur mobile -->
           <div class="absolute top-60 right-40 w-3 h-3 rounded-full bg-purple-400 
-                      animate-float-fast" style="animation-delay: 1s"></div>
+                      animate-float-fast hidden md:block" style="animation-delay: 1s"></div> <!-- Caché sur mobile -->
 
         </div>
 
@@ -247,7 +247,7 @@
     <div class="mt-6">
       <h3 class="text-xl font-bold text-center mb-6">
         <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          {{ languageService.language() === 'fr' ? 'Technologies maîtrisées' : 'التقنيات المتقنة' }}
+          {{  languageService.language() === 'fr' ? 'Technologies maîtrisées' : 'التقنيات المتقنة' }}
         </span>
       </h3>
       
@@ -259,7 +259,7 @@
                     flex items-center gap-2">
           <lucide-icon [img]="tech.icon" class="h-4 w-4 text-cyan-500"></lucide-icon>
           <span class="text-sm">{{ tech.name }}</span>
-          <span class="text-xs text-muted-foreground">({{ getText(tech.category) }})</span>
+          <span class="text-xs text-muted-foreground">({{ tech.category }})</span>
         </div>
       </div>
     </div>
@@ -267,12 +267,12 @@
     <!-- Clients Sectors -->
     <div class="mt-10 text-center">
       <p class="text-sm text-muted-foreground mb-3">
-        {{ languageService.language() === 'fr' ? 'Ils nous font confiance :' : 'يثقون بنا:' }}
+        {{  languageService.language() === 'fr' ? 'Ils nous font confiance :' : 'يثقون بنا:' }}
       </p>
       <div class="flex flex-wrap justify-center gap-2">
         <span *ngFor="let sector of clientSectors" 
               class="px-3 py-1 bg-cyan-500/10 rounded-full text-xs text-cyan-500 border border-cyan-500/20">
-          {{ getText(sector) }}
+          {{ sector }}
         </span>
       </div>
     </div>

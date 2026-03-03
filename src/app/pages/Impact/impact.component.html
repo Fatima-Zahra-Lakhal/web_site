@@ -33,11 +33,11 @@
       
       <!-- Subtitle -->
       <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        {{ currentLang === 'fr' 
-          ? 'Des résultats concrets qui parlent d\'eux-mêmes'
-          : 'نتائج ملموسة تتحدث عن نفسها'
-        }}
-      </p>
+  {{ currentLang === 'fr' 
+    ? 'Nous livrons des résultats concrets, mesurables et durables qui reflètent notre engagement envers l\'excellence et la satisfaction de nos clients.'
+    : 'نقدم نتائج ملموسة وقابلة للقياس ومستدامة تعكس التزامنا بالتميز وحرصنا على تحقيق رضا عملائنا.'
+  }}
+</p>
     </div>
 
     <!-- Barres de progression - Style 1 (Vertical) -->
@@ -75,65 +75,65 @@
     </div>
 
     <!-- Style 2 - Barres horizontales -->
-    <div class="max-w-3xl mx-auto mb-16">
+    <!-- <div class="max-w-3xl mx-auto mb-16">
       <h3 class="text-2xl font-bold text-center mb-10">
         <span class="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
           {{ currentLang === 'fr' ? 'Indicateurs de performance' : 'مؤشرات الأداء' }}
         </span>
-      </h3>
+      </h3> -->
 
-      <div class="space-y-6">
+      <!-- <div class="space-y-6">
         <div *ngFor="let item of impactData; let i = index" 
              class="group"
-             @fadeUp>
+             @fadeUp> -->
           
           <!-- Label et valeur -->
-          <div class="flex justify-between items-center mb-2">
+          <!-- <div class="flex justify-between items-center mb-2">
             <div class="flex items-center gap-2">
               <lucide-icon [img]="item.icon" class="h-4 w-4 text-cyan-500"></lucide-icon>
               <span class="text-gray-700 dark:text-gray-300">{{ getText(item.label) }}</span>
             </div>
             <span class="font-bold text-cyan-600 dark:text-cyan-400">{{ item.value }}</span>
-          </div>
+          </div> -->
 
           <!-- Barre de progression horizontale -->
-          <div class="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+          <!-- <div class="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
             <div class="absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out"
                  [style.width]="item.percentage + '%'"
                  [ngClass]="'bg-gradient-to-r ' + item.color">
-            </div>
+            </div> -->
             
             <!-- Effet de brillance au survol -->
-            <div class="absolute top-0 left-0 h-full w-20 bg-white/30 dark:bg-white/10 blur-md 
+            <!-- <div class="absolute top-0 left-0 h-full w-20 bg-white/30 dark:bg-white/10 blur-md 
                         -translate-x-full group-hover:translate-x-[500%] transition-transform duration-1000"></div>
-          </div>
+          </div> -->
 
           <!-- Description -->
-          <div class="mt-1 text-xs text-gray-500 dark:text-white/30 text-right">
+          <!-- <div class="mt-1 text-xs text-gray-500 dark:text-white/30 text-right">
             {{ getText(item.description) }}
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Style 3 - Cercles de progression -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+    <!-- <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
       <div *ngFor="let item of keyValues; let i = index" 
            class="text-center group"
-           @fadeUp>
+           @fadeUp> -->
         
         <!-- Cercle de progression -->
-        <div class="relative w-32 h-32 mx-auto mb-4">
+        <!-- <div class="relative w-32 h-32 mx-auto mb-4"> -->
           <!-- Cercle de fond -->
-          <svg class="w-full h-full" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="45" 
-                    fill="none" 
+          <!-- <svg class="w-full h-full" viewBox="0 0 100 100"> -->
+            <!-- <circle cx="50" cy="50" r="45"  -->
+                    <!-- fill="none" 
                     stroke="currentColor" 
                     class="text-gray-200 dark:text-gray-800"
                     stroke-width="8"/>
-            
+             -->
             <!-- Cercle de progression (exemple à 75%) -->
-            <circle cx="50" cy="50" r="45" 
+            <!-- <circle cx="50" cy="50" r="45" 
                     fill="none" 
                     [ngClass]="'stroke-cyan-500 dark:stroke-cyan-400'"
                     stroke-width="8"
@@ -141,22 +141,22 @@
                     stroke-dasharray="283"
                     stroke-dashoffset="70"
                     transform="rotate(-90 50 50)"/>
-          </svg>
+          </svg> -->
           
           <!-- Valeur au centre -->
-          <div class="absolute inset-0 flex items-center justify-center">
+          <!-- <div class="absolute inset-0 flex items-center justify-center">
             <span class="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
               {{ item.value }}
             </span>
           </div>
-        </div>
+        </div> -->
 
         <!-- Label -->
-        <div class="text-sm text-gray-600 dark:text-white/40">
+        <!-- <div class="text-sm text-gray-600 dark:text-white/40">
           {{ getText(item.label) }}
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Note de bas de page -->
     <div class="mt-16 text-center" @fadeUp>

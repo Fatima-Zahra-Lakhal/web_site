@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     { id: 'home', key: 'nav.home' },
     { id: 'services', key: 'nav.services' },
     { id: 'impact', key: 'nav.impact' },
-    { id: 'portfolio', key: 'nav.portfolio' },
+    { id: 'réalisations', key: 'nav.portfolio' },
     { id: 'expertise', key: 'nav.expertise' },
     { id: 'partners', key: 'nav.partners' },
     { id: 'about', key: 'nav.about' },
@@ -53,8 +53,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-
-    // 🔥 Détecter changement de route
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: any) => {
@@ -64,29 +62,31 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateHomeState(this.router.url);
+    // Vérifier l'état initial du scroll
+    this.checkScroll();
   }
 
-  // ✅ Vérifie si on est sur Home
   updateHomeState(url: string) {
     const isHome = url === '/' || url.startsWith('/#');
     this.isHomeSection = isHome;
   }
 
-  // 🔥 Scroll detection
   @HostListener('window:scroll')
   onScroll(): void {
-    this.scrolled = window.scrollY > 50;
+    this.checkScroll();
+  }
 
+  checkScroll() {
+    this.scrolled = window.scrollY > 50;
+    
+    // Optionnel : ajuster isHomeSection en fonction du scroll
     if (this.router.url === '/' || this.router.url.startsWith('/#')) {
       this.isHomeSection = window.scrollY < 1000;
     }
   }
 
-  // ✅ Navigation vers section
   scrollToSection(id: string) {
-
     this.router.navigate(['/'], { fragment: id });
-
     this.mobileMenuOpen = false;
   }
 
