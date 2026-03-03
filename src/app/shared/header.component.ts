@@ -21,9 +21,14 @@ import { filter } from 'rxjs';
       ])
     ]),
     trigger('mobileMenu', [
-      state('open', style({ height: '*', opacity: 1 })),
-      state('closed', style({ height: '0px', opacity: 0 })),
-      transition('open <=> closed', animate('300ms ease'))
+      transition(':enter', [
+        style({ height: '0', opacity: 0 }),
+        animate('300ms ease-out', style({ height: '*', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ height: '*', opacity: 1 }),
+        animate('300ms ease-in', style({ height: '0', opacity: 0 }))
+      ])
     ])
   ]
 })
@@ -39,6 +44,7 @@ export class HeaderComponent implements OnInit {
     { id: 'about', key: 'nav.about' },
     { id: 'contact', key: 'nav.contact' }
   ];
+  
   Moon = Moon;
   Sun = Sun;
   Globe = Globe;
@@ -55,15 +61,31 @@ export class HeaderComponent implements OnInit {
   ) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .subscribe((event: NavigationEnd) => {
         this.updateHomeState(event.urlAfterRedirects);
       });
   }
 
   ngOnInit(): void {
     this.updateHomeState(this.router.url);
-    // Vérifier l'état initial du scroll
     this.checkScroll();
+    
+    // Fermer le menu mobile si on redimensionne vers desktop
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('resize', this.onResize.bind(this));
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('resize', this.onResize.bind(this));
+    }
+  }
+
+  onResize(): void {
+    if (window.innerWidth >= 768) { // md breakpoint
+      this.mobileMenuOpen = false;
+    }
   }
 
   updateHomeState(url: string) {
@@ -76,17 +98,48 @@ export class HeaderComponent implements OnInit {
     this.checkScroll();
   }
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    // Fermer le menu mobile si on clique en dehors
+    if (this.mobileMenuOpen && isPlatformBrowser(this.platformId)) {
+      const target = event.target as HTMLElement;
+      const mobileMenu = document.querySelector('.mobile-menu-container');
+      const menuButton = document.querySelector('.md:hidden.p-3');
+      
+      if (mobileMenu && !mobileMenu.contains(target) && menuButton && !menuButton.contains(target)) {
+        this.mobileMenuOpen = false;
+      }
+    }
+  }
+
   checkScroll() {
-    this.scrolled = window.scrollY > 50;
-    
-    // Optionnel : ajuster isHomeSection en fonction du scroll
-    if (this.router.url === '/' || this.router.url.startsWith('/#')) {
-      this.isHomeSection = window.scrollY < 1000;
+    if (isPlatformBrowser(this.platformId)) {
+      this.scrolled = window.scrollY > 50;
+      
+      // Optionnel : ajuster isHomeSection en fonction du scroll
+      if (this.router.url === '/' || this.router.url.startsWith('/#')) {
+        this.isHomeSection = window.scrollY < 1000;
+      }
     }
   }
 
   scrollToSection(id: string) {
-    this.router.navigate(['/'], { fragment: id });
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.navigate(['/'], { fragment: id }).then(() => {
+        // Attendre un peu que la navigation se termine
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          }
+        }, 100);
+      });
+    }
+    
+    // Fermer le menu mobile après navigation
     this.mobileMenuOpen = false;
   }
 

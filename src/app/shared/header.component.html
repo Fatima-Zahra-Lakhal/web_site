@@ -12,6 +12,7 @@
       <!-- Logo -->
       <div class="relative z-10">
         <img src="assets/lambdasoft.png"
+             alt="LambdaSoft Logo"
              class="h-20 cursor-pointer"
              (click)="scrollToSection('home')" />
       </div>
@@ -48,10 +49,11 @@
           [ngClass]="{
             'bg-white/10 md:bg-white/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-none': !scrolled,
             'bg-white md:bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
-          }">
+          }"
+          [attr.aria-label]="'Changer de langue'">
 
           <lucide-icon [img]="Globe" size="18"></lucide-icon>
-          <span>{{ languageService.language() | uppercase }}</span>
+          <span class="hidden sm:inline">{{ languageService.language() | uppercase }}</span>
 
         </button>
 
@@ -62,7 +64,8 @@
           [ngClass]="{
             'bg-white/10 md:bg-white/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-none': !scrolled,
             'bg-white md:bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
-          }">
+          }"
+          [attr.aria-label]="'Changer de thème'">
 
           <lucide-icon
             *ngIf="themeService.theme() === 'light'"
@@ -83,7 +86,8 @@
             'bg-white/10 dark:bg-gray-800/10 border-transparent text-gray-200 dark:text-gray-300 backdrop-blur-sm': !scrolled,
             'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 shadow-sm hover:shadow': scrolled
           }"
-          (click)="toggleMenu()">
+          (click)="toggleMenu()"
+          [attr.aria-label]="mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'">
           <span *ngIf="!mobileMenuOpen">☰</span>
           <span *ngIf="mobileMenuOpen">✕</span>
         </button>
@@ -91,17 +95,17 @@
       </div>
     </div>
 
-    <!-- Mobile Menu (UNIQUEMENT le menu qui s'affiche quand on clique) -->
+    <!-- Mobile Menu -->
     <div *ngIf="mobileMenuOpen" 
          @mobileMenu
-         class="md:hidden overflow-hidden rounded-b-2xl absolute left-0 right-0 top-20 mx-4 z-20
+         class="mobile-menu-container md:hidden overflow-hidden rounded-2xl absolute left-4 right-4 top-20 z-20
                 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-xl">
       
       <nav class="py-2 px-2">
         
         <button
           *ngFor="let item of navItems"
-          (click)="scrollToSection(item.id); toggleMenu()"
+          (click)="scrollToSection(item.id)"
           class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors
                  text-gray-700 dark:text-gray-200 hover:text-cyan-600 dark:hover:text-cyan-400 
                  hover:bg-gray-100 dark:hover:bg-gray-800">
