@@ -118,45 +118,68 @@
     </div>
 
     <!-- Trust Indicators -->
-    <div class="mt-20 text-center" @fadeUp>
-      <div class="inline-flex items-center gap-8 px-8 py-6 
-                  rounded-2xl bg-white/70 dark:bg-card/50 backdrop-blur-sm border border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none">
-        
-        <div>
-          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
-            25+
-          </div>
-          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Partenaires actifs' : 'شريك نشط' }}</div>
-        </div>
-        
-        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
-        
-        <div>
-          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
-            15+
-          </div>
-          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Ans de collaboration' : 'سنوات من التعاون' }}</div>
-        </div>
-        
-        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
-        
-        <div>
-          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
-            150+
-          </div>
-          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Projets réalisés' : 'مشروع منجز' }}</div>
-        </div>
-        
-        <div class="w-px h-12 bg-gray-200 dark:bg-white/10"></div>
-        
-        <div>
-          <div class="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
-            98%
-          </div>
-          <div class="text-sm text-gray-600 dark:text-white/40">{{ currentLang === 'fr' ? 'Satisfaction' : 'رضا العملاء' }}</div>
-        </div>
+    <div class="mt-12 md:mt-20 text-center px-2" @fadeUp>
+  
+  <!-- Version responsive : taille réduite sur mobile, inchangée sur desktop -->
+  <div class="inline-flex items-center gap-2 sm:gap-4 md:gap-8 px-2 sm:px-4 md:px-8 py-2 sm:py-3 md:py-6 
+              rounded-lg sm:rounded-xl md:rounded-2xl bg-white/70 dark:bg-card/50 backdrop-blur-sm 
+              border border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none
+              max-w-full mx-auto flex-wrap justify-center">
+    
+    <!-- 25+ -->
+    <div class="text-center min-w-[60px] sm:min-w-[80px] md:min-w-0">
+      <div class="text-base sm:text-lg md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 
+                  dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+        25+
+      </div>
+      <div class="text-[8px] sm:text-[10px] md:text-sm text-gray-600 dark:text-white/40 whitespace-nowrap">
+        {{ currentLang === 'fr' ? 'Partenaires' : 'شريك' }}
       </div>
     </div>
+    
+    <!-- Séparateur (caché sur très petit écran) -->
+    <div class="hidden xs:block w-px h-6 sm:h-8 md:h-12 bg-gray-200 dark:bg-white/10"></div>
+    
+    <!-- 15+ -->
+    <div class="text-center min-w-[60px] sm:min-w-[80px] md:min-w-0">
+      <div class="text-base sm:text-lg md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 
+                  dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+        15+
+      </div>
+      <div class="text-[8px] sm:text-[10px] md:text-sm text-gray-600 dark:text-white/40 whitespace-nowrap">
+        {{ currentLang === 'fr' ? 'Années' : 'سنوات' }}
+      </div>
+    </div>
+    
+    <!-- Séparateur -->
+    <div class="hidden xs:block w-px h-6 sm:h-8 md:h-12 bg-gray-200 dark:bg-white/10"></div>
+    
+    <!-- 150+ -->
+    <div class="text-center min-w-[60px] sm:min-w-[80px] md:min-w-0">
+      <div class="text-base sm:text-lg md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 
+                  dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+        150+
+      </div>
+      <div class="text-[8px] sm:text-[10px] md:text-sm text-gray-600 dark:text-white/40 whitespace-nowrap">
+        {{ currentLang === 'fr' ? 'Projets' : 'مشروع' }}
+      </div>
+    </div>
+    
+    <!-- Séparateur -->
+    <div class="hidden xs:block w-px h-6 sm:h-8 md:h-12 bg-gray-200 dark:bg-white/10"></div>
+    
+    <!-- 98% -->
+    <div class="text-center min-w-[60px] sm:min-w-[80px] md:min-w-0">
+      <div class="text-base sm:text-lg md:text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 
+                  dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+        98%
+      </div>
+      <div class="text-[8px] sm:text-[10px] md:text-sm text-gray-600 dark:text-white/40 whitespace-nowrap">
+        {{ currentLang === 'fr' ? 'Satisfaction' : 'رضا' }}
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- CTA -->
     <div class="mt-16 text-center" @fadeUp>

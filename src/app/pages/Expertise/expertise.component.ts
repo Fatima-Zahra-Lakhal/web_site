@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate, state, query, stagger, keyframes } from '@angular/animations';
 import { 
@@ -195,4 +195,15 @@ export class ExpertiseComponent {
     { name: '.NET', icon: Code2, color: 'from-rose-500 to-pink-500' },
     { name: 'Développer 2000', icon: Code2, color: 'from-pink-500 to-purple-500' }
   ];
+  // Pour la progression de la timeline (optionnel)
+timelineProgressWidth: number = 100; // Desktop : 100% par défaut
+timelineProgressHeight: number = 100; // Mobile : 100% par défaut
+onScroll(): void {
+  const element = document.querySelector('.timeline-container');
+  if (element) {
+    const rect = element.getBoundingClientRect();
+    const scrollPercent = (window.scrollY - rect.top) / rect.height;
+    this.timelineProgressHeight = Math.min(100, Math.max(0, scrollPercent * 100));
+  }
+}
 }
