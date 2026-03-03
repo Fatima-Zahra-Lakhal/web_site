@@ -150,4 +150,10 @@ export class BecomePartnerComponent {
     this.success = false;
     this.currentStep = 1;
   }
+  getProgressLineWidth(): number {
+  if (this.currentStep === 1) return 0;
+  if (this.currentStep === 2) return 33.33; // Moitié du chemin (entre step 1 et 2)
+  if (this.currentStep === 3) return 66.66; // Jusqu'entre step 2 et 3
+  return 100; // Après step 3 (mais normalement pas utilisé)
+}
 }
